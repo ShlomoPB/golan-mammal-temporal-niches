@@ -38,6 +38,20 @@ Then run:
 Rscript run_all.R
 ```
 
+For a clean-checkout reproducibility audit, confirm that all analytical checks
+pass and that every non-PDF output matches the release exactly:
+
+```powershell
+Rscript -e "x <- read.csv('manuscript_outputs/diagnostics/validation_checks.csv'); stopifnot(nrow(x) == 29, all(x[, 'passed']))"
+git diff --exit-code -- manuscript_outputs ":(exclude)**/*.pdf" ":(exclude)manuscript_outputs/metadata/output_manifest.csv"
+```
+
+The Cairo PDF device may write different internal compressed metadata between
+runs, and `output_manifest.csv` consequently may report slightly different PDF
+byte sizes. These binary differences do not affect the plotted content. The
+corresponding PNG figures, statistical CSVs, validation records, and other
+non-PDF outputs must remain unchanged.
+
 The default `publication` profile uses the manuscript settings: 9,999 Part 1
 randomizations, 999 Part 4 randomizations, 9,999 Part 6 randomizations, 4,999
 nocturnality bootstraps, 499 interspecific-overlap bootstraps, and 1,999
