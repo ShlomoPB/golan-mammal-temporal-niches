@@ -1,0 +1,43 @@
+Species,Land-use pair,Group 1,Group 2,"n events, group 1","n events, group 2",Estimator,Overlap,SE,SE source,p,p_adj
+Canis lupus,HC-LC,High culling,Low culling,219,153,Dhat4,0.9288428110045148,0.0249578290966355,compareCkern randomization-null SE,0.5781578157815782,1
+Canis lupus,HC-NR,High culling,Nature reserves,219,239,Dhat4,0.8830290913648349,0.0219394729174005,compareCkern randomization-null SE,0.0368036803680368,0.2208220822082208
+Canis lupus,HC-MF,High culling,Minefields,219,244,Dhat4,0.8855305874380575,0.021879733110869475,compareCkern randomization-null SE,0.041804180418041806,0.2208220822082208
+Canis lupus,LC-NR,Low culling,Nature reserves,153,239,Dhat4,0.9376990071377119,0.02379403850458344,compareCkern randomization-null SE,0.5304530453045304,1
+Canis lupus,LC-MF,Low culling,Minefields,153,244,Dhat4,0.9408411012863653,0.023752385076744965,compareCkern randomization-null SE,0.5496549654965497,1
+Canis lupus,NR-MF,Nature reserves,Minefields,239,244,Dhat4,0.9556752462685787,0.021318896912505315,compareCkern randomization-null SE,0.9024902490249025,1
+Canis aureus,HC-LC,High culling,Low culling,2367,1310,Dhat4,0.9163365381000155,0.00839242659910097,compareCkern randomization-null SE,0,0
+Canis aureus,HC-NR,High culling,Nature reserves,2367,2484,Dhat4,0.871544555362971,0.006888438786010089,compareCkern randomization-null SE,0,0
+Canis aureus,HC-MF,High culling,Minefields,2367,4209,Dhat4,0.8442703791347257,0.0062529206707554455,compareCkern randomization-null SE,0,0
+Canis aureus,LC-NR,Low culling,Nature reserves,1310,2484,Dhat4,0.9253606050187216,0.008239916557057195,compareCkern randomization-null SE,0,0
+Canis aureus,LC-MF,Low culling,Minefields,1310,4209,Dhat4,0.8991815694191632,0.007708103769871618,compareCkern randomization-null SE,0,0
+Canis aureus,NR-MF,Nature reserves,Minefields,2484,4209,Dhat4,0.9202285177263699,0.006093050024585372,compareCkern randomization-null SE,0,0
+Sus scrofa,HC-LC,High culling,Low culling,418,724,Dhat4,0.8837274966078539,0.014355811027391044,compareCkern randomization-null SE,3.0003000300030005e-4,3.0003000300030005e-4
+Sus scrofa,HC-NR,High culling,Nature reserves,418,1158,Dhat4,0.8157504122926225,0.013359401974602626,compareCkern randomization-null SE,0,0
+Sus scrofa,HC-MF,High culling,Minefields,418,1044,Dhat4,0.7667494150904475,0.0135968302623056,compareCkern randomization-null SE,0,0
+Sus scrofa,LC-NR,Low culling,Nature reserves,724,1158,Dhat4,0.8711762725438297,0.011493496014088852,compareCkern randomization-null SE,0,0
+Sus scrofa,LC-MF,Low culling,Minefields,724,1044,Dhat4,0.7828336667984859,0.011809117418611648,compareCkern randomization-null SE,0,0
+Sus scrofa,NR-MF,Nature reserves,Minefields,1158,1044,Dhat4,0.8742447437947648,0.010348133772251435,compareCkern randomization-null SE,0,0
+Gazella gazella,HC-LC,High culling,Low culling,799,1061,Dhat4,0.9557125962012275,0.011395996459923494,compareCkern randomization-null SE,0.6338633863386338,0.6338633863386338
+Gazella gazella,HC-NR,High culling,Nature reserves,799,1211,Dhat4,0.9393719644972449,0.011116310869348316,compareCkern randomization-null SE,0.13061306130613062,0.26122612261226125
+Gazella gazella,HC-MF,High culling,Minefields,799,625,Dhat4,0.8984397672950755,0.013171942604787665,compareCkern randomization-null SE,0.0018001800180018,0.010801080108010801
+Gazella gazella,LC-NR,Low culling,Nature reserves,1061,1211,Dhat4,0.9296472184262041,0.010207904214971206,compareCkern randomization-null SE,0.0111011101110111,0.0333033303330333
+Gazella gazella,LC-MF,Low culling,Minefields,1061,625,Dhat4,0.9115109309224241,0.012514473037008068,compareCkern randomization-null SE,0.0070007000700070005,0.028002800280028002
+Gazella gazella,NR-MF,Nature reserves,Minefields,1211,625,Dhat4,0.9068897720838599,0.012131930481329626,compareCkern randomization-null SE,0.003000300030003,0.015001500150015001
+Vulpes vulpes,HC-LC,High culling,Low culling,894,663,Dhat4,0.9164960681622665,0.012396200615749406,compareCkern randomization-null SE,0.010001000100010001,0.020002000200020003
+Vulpes vulpes,HC-NR,High culling,Nature reserves,894,611,Dhat4,0.9022026663958225,0.012708927088405179,compareCkern randomization-null SE,0.0013001300130013002,0.004000400040004
+Vulpes vulpes,HC-MF,High culling,Minefields,894,1375,Dhat4,0.9571093456231432,0.010213815241746504,compareCkern randomization-null SE,0.48324832483248326,0.48324832483248326
+Vulpes vulpes,LC-NR,Low culling,Nature reserves,663,611,Dhat4,0.8581639517466746,0.013436984750916316,compareCkern randomization-null SE,0,0
+Vulpes vulpes,LC-MF,Low culling,Minefields,663,1375,Dhat4,0.9052609944015857,0.011401579923044917,compareCkern randomization-null SE,0.001000100010001,0.004000400040004
+Vulpes vulpes,NR-MF,Nature reserves,Minefields,611,1375,Dhat4,0.9038700420422836,0.011772231999573082,compareCkern randomization-null SE,7.000700070007e-4,0.0035003500350035003
+Meles meles,HC-LC,High culling,Low culling,40,31,Dhat1,0.795473088591244,0.07557384299737877,within-group bootstrap SE,0.174,1
+Meles meles,HC-NR,High culling,Nature reserves,40,39,Dhat1,0.8618901211646612,0.061503532510657884,within-group bootstrap SE,0.49,1
+Meles meles,HC-MF,High culling,Minefields,40,94,Dhat1,0.8245362782714648,0.05848503432909843,within-group bootstrap SE,0.216,1
+Meles meles,LC-NR,Low culling,Nature reserves,31,39,Dhat1,0.8571197751915106,0.07546062077798019,within-group bootstrap SE,0.566,1
+Meles meles,LC-MF,Low culling,Minefields,31,94,Dhat1,0.8864033301857955,0.054722298546383746,within-group bootstrap SE,0.824,1
+Meles meles,NR-MF,Nature reserves,Minefields,39,94,Dhat1,0.8222563646455125,0.05828490035679135,within-group bootstrap SE,0.21,1
+Hystrix indica,HC-LC,High culling,Low culling,237,227,Dhat4,0.8668094520149975,0.02256912946751717,compareCkern randomization-null SE,0.0087008700870087,0.0348034803480348
+Hystrix indica,HC-NR,High culling,Nature reserves,237,481,Dhat4,0.9174913853203825,0.019031397680555708,compareCkern randomization-null SE,0.13621362136213622,0.13621362136213622
+Hystrix indica,HC-MF,High culling,Minefields,237,258,Dhat4,0.8194297444270482,0.02167289248471693,compareCkern randomization-null SE,2.0002000200020003e-4,0.0012001200120012002
+Hystrix indica,LC-NR,Low culling,Nature reserves,227,481,Dhat4,0.883029306833031,0.019038864712560815,compareCkern randomization-null SE,0.0039003900390039005,0.0195019501950195
+Hystrix indica,LC-MF,Low culling,Minefields,227,258,Dhat4,0.8871690045144346,0.021803479069798844,compareCkern randomization-null SE,0.0484048404840484,0.0999099909990999
+Hystrix indica,NR-MF,Nature reserves,Minefields,481,258,Dhat4,0.893381198989072,0.018252632264979047,compareCkern randomization-null SE,0.0333033303330333,0.0999099909990999

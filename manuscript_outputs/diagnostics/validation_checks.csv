@@ -1,0 +1,30 @@
+check,passed,detail
+Seven focal species,TRUE,observed 7
+Four land-use categories,TRUE,observed 4
+60 camera stations,TRUE,observed 60
+One exact cross-session focal event is collapsed,TRUE,2 export rows representing one wild-boar event
+Table 1 has 42 species-by-pair rows,TRUE,observed 42
+Table A.1 has seven species,TRUE,observed 7
+Table A.2 has seven species plus humans,TRUE,observed 8
+Table A.3 has 28 species-by-land-use rows,TRUE,observed 28
+Table A.4 source has 84 pair-by-land-use rows,TRUE,observed 84
+All Part 1 density curves integrate to one,TRUE,tolerance = 0.002
+All Part 4 density curves integrate to one,TRUE,tolerance = 0.002
+No Table A.3 mean lies outside its 95% CI,TRUE,mean must be bounded by CI
+Gazelle Q1/Q4 groups contain exactly 15 cameras each,TRUE,15 and 15
+Gazelle Part 4 event samples match the exact Q1/Q4 split,TRUE,expected Q1 = 960 and Q4 = 483 events
+Badger Part 4 event samples match the exact Q1/Q4 split,TRUE,expected Q1 = 58 and Q4 = 49 events
+Wild-boar Part 4 samples exclude the duplicated session-boundary event,TRUE,expected Q1 = 932 and Q4 = 886 independent events
+Gazelle Q4-Q1 nocturnality effect matches camera-local timestamps,TRUE,Q4-Q1 = 1.0678 h
+Gazelle overlap agrees with the shaded unit-area curves,TRUE,absolute tolerance = 0.01
+Table B.1 has 15 cameras in every quartile,TRUE,"15, 15, 15, 15"
+All Part 5 beta models report optimizer convergence,TRUE,"0, 0, 0, 0, 0, 0"
+All Part 5 beta models have positive-definite Hessians,TRUE,"TRUE, TRUE, TRUE, TRUE, TRUE, TRUE"
+Output exists: Figure_2_detection_totals_by_land_use.png,TRUE,manuscript_outputs/main_figures/Figure_2_detection_totals_by_land_use.png
+Output exists: Figure_3_land_use_activity.png,TRUE,manuscript_outputs/main_figures/Figure_3_land_use_activity.png
+Output exists: Figure_4_nocturnality_gradient.png,TRUE,manuscript_outputs/main_figures/Figure_4_nocturnality_gradient.png
+Output exists: Figure_5_pairwise_overlap_matrices.png,TRUE,manuscript_outputs/main_figures/Figure_5_pairwise_overlap_matrices.png
+Output exists: Figure_6_gazelle_human_and_reserve_activity.png,TRUE,manuscript_outputs/main_figures/Figure_6_gazelle_human_and_reserve_activity.png
+Output exists: Table_1_land_use_activity_tests.csv,TRUE,manuscript_outputs/main_tables/Table_1_land_use_activity_tests.csv
+Output exists: Figure_A1_nocturnality_by_land_use.png,TRUE,manuscript_outputs/supplementary_figures/Figure_A1_nocturnality_by_land_use.png
+Output exists: Figure_A2_activity_by_human_activity.png,TRUE,manuscript_outputs/supplementary_figures/Figure_A2_activity_by_human_activity.png

@@ -1,0 +1,2 @@
+backend,equivalence_tolerance,maximum_observed_equivalence_error
+Rcpp/OpenMP von Mises kernel backend,1e-10,0

@@ -1,0 +1,3 @@
+camera_name,trap_station_session_id,species,date_time,sighting_quantity,camelot_gps_latitude,camelot_gps_longitude,lon,lat,time_rad,land_use,solar_hour,nocturnality_h,export_rows_for_event
+32,258,Sus scrofa,2020-10-18 05:47:17,1,33.2124,35.7268,35.7268,33.2124,1.33762351158122,Nature reserves,5.109345452738167,6.890654547261833,2
+32,259,Sus scrofa,2020-10-18 05:47:17,1,33.2124,35.7268,35.7268,33.2124,1.33762351158122,Nature reserves,5.109345452738167,6.890654547261833,2

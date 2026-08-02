@@ -1,0 +1,7 @@
+model,optimizer_convergence_code,optimizer_message,positive_definite_hessian
+Non-gazelle pairs: rank,0,relative convergence (4),TRUE
+Non-gazelle pairs: unranked,0,relative convergence (4),TRUE
+Non-gazelle pairs: null,0,relative convergence (4),TRUE
+Gazelle vs others: rank,0,relative convergence (4),TRUE
+Gazelle vs others: unranked,0,relative convergence (4),TRUE
+Gazelle vs others: null,0,both X-convergence and relative convergence (5),TRUE

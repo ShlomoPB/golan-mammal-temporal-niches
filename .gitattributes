@@ -1,0 +1,24 @@
+* text=auto
+
+# Keep source and documentation checksums stable across operating systems.
+*.R text eol=lf
+*.Rprofile text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.md text eol=lf
+*.cff text eol=lf
+*.json text eol=lf
+*.lock text eol=lf
+DESCRIPTION text eol=lf
+LICENSE text eol=lf
+
+# Generated result CSVs are reviewable text. Canonical input checksums include
+# their original line endings, so the two data files remain byte-preserved.
+*.csv text eol=lf
+data/*.csv binary
+
+*.png binary
+*.jpeg binary
+*.jpg binary
+*.pdf binary
+*.xlsx binary

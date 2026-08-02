@@ -1,0 +1,61 @@
+camera_name,human.abundance,human_activity_quartile,land_use
+44,0.050498529,Q1 (lowest),Nature reserves
+10,0.096756924,Q1 (lowest),Nature reserves
+57,0.106761918,Q1 (lowest),High culling
+26,0.16536057,Q1 (lowest),Minefields
+47,0.174622556,Q1 (lowest),Low culling
+3,0.183115166,Q1 (lowest),High culling
+24,0.183431055,Q1 (lowest),Minefields
+20,0.19806645,Q1 (lowest),High culling
+34,0.212953964,Q1 (lowest),Nature reserves
+12,0.216966215,Q1 (lowest),Minefields
+37,0.228575472,Q1 (lowest),Low culling
+22,0.247602825,Q1 (lowest),Minefields
+43,0.25218617,Q1 (lowest),Nature reserves
+41,0.259131046,Q1 (lowest),Nature reserves
+9,0.26208267,Q1 (lowest),Nature reserves
+50,0.27012536,Q2,Low culling
+27,0.27556225,Q2,Minefields
+16,0.280874339,Q2,High culling
+40,0.282120645,Q2,Low culling
+15,0.286927376,Q2,Minefields
+28,0.297606215,Q2,Minefields
+42,0.303482163,Q2,Nature reserves
+30,0.307826935,Q2,Minefields
+45,0.324185055,Q2,Nature reserves
+6,0.325951939,Q2,Nature reserves
+52,0.33150267,Q2,Low culling
+38,0.336627168,Q2,Low culling
+18,0.347136774,Q2,High culling
+53,0.348021402,Q2,Low culling
+48,0.348643416,Q2,Low culling
+49,0.352060011,Q3,Low culling
+59,0.356012281,Q3,High culling
+21,0.361427921,Q3,Minefields
+29,0.365824578,Q3,Minefields
+23,0.370698204,Q3,Minefields
+56,0.379127211,Q3,High culling
+2,0.390693886,Q3,High culling
+4,0.401722898,Q3,High culling
+46,0.404841117,Q3,Low culling
+33,0.443898409,Q3,Nature reserves
+35,0.444347734,Q3,Nature reserves
+51,0.445240025,Q3,Low culling
+7,0.446267242,Q3,Nature reserves
+1,0.447382204,Q3,High culling
+55,0.449441398,Q3,Low culling
+17,0.464054375,Q4 (highest),High culling
+54,0.465181504,Q4 (highest),Low culling
+36,0.478011706,Q4 (highest),Low culling
+8,0.48709211,Q4 (highest),Nature reserves
+60,0.487608241,Q4 (highest),High culling
+25,0.588550108,Q4 (highest),Minefields
+32,0.588781093,Q4 (highest),Nature reserves
+11,0.59107239600000006,Q4 (highest),Minefields
+31,0.597787928,Q4 (highest),Nature reserves
+13,0.627665353,Q4 (highest),Minefields
+14,0.662660094,Q4 (highest),Minefields
+58,0.701681862,Q4 (highest),High culling
+19,0.875419295,Q4 (highest),High culling
+5,0.878387746,Q4 (highest),High culling
+39,1,Q4 (highest),Low culling

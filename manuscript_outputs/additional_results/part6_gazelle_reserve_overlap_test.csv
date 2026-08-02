@@ -1,0 +1,2 @@
+comparison,n_temporally_zoned,n_open_access,n_individuals_temporally_zoned,n_individuals_open_access,n1,n2,n_individuals1,n_individuals2,estimator,delta,bootstrap_se,ci_low,ci_high,null_mean,null_se,p_value,test,n_randomizations
+Temporally zoned reserve vs open-access reserve,992,214,1219,235,992,214,1219,235,Dhat4,0.8539935127424083,NA,NA,NA,0.919563384965587,0.01867370742679065,0.0014001400140014,weighted compareCkern,9999

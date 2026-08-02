@@ -1,0 +1,31 @@
+camera_name,value,quartile_group,land_use
+44,0.050498529,Q1,Nature reserves
+10,0.096756924,Q1,Nature reserves
+57,0.106761918,Q1,High culling
+26,0.16536057,Q1,Minefields
+47,0.174622556,Q1,Low culling
+3,0.183115166,Q1,High culling
+24,0.183431055,Q1,Minefields
+20,0.19806645,Q1,High culling
+34,0.212953964,Q1,Nature reserves
+12,0.216966215,Q1,Minefields
+37,0.228575472,Q1,Low culling
+22,0.247602825,Q1,Minefields
+43,0.25218617,Q1,Nature reserves
+41,0.259131046,Q1,Nature reserves
+9,0.26208267,Q1,Nature reserves
+17,0.464054375,Q4,High culling
+54,0.465181504,Q4,Low culling
+36,0.478011706,Q4,Low culling
+8,0.48709211,Q4,Nature reserves
+60,0.487608241,Q4,High culling
+25,0.588550108,Q4,Minefields
+32,0.588781093,Q4,Nature reserves
+11,0.59107239600000006,Q4,Minefields
+31,0.597787928,Q4,Nature reserves
+13,0.627665353,Q4,Minefields
+14,0.662660094,Q4,Minefields
+58,0.701681862,Q4,High culling
+19,0.875419295,Q4,High culling
+5,0.878387746,Q4,High culling
+39,1,Q4,Low culling

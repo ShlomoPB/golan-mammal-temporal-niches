@@ -1,0 +1,15 @@
+species,group,area
+Canis lupus,Low human activity (Q1),1
+Canis lupus,High human activity (Q4),1
+Canis aureus,Low human activity (Q1),1
+Canis aureus,High human activity (Q4),1
+Sus scrofa,Low human activity (Q1),1
+Sus scrofa,High human activity (Q4),1
+Gazella gazella,Low human activity (Q1),1
+Gazella gazella,High human activity (Q4),1
+Vulpes vulpes,Low human activity (Q1),1
+Vulpes vulpes,High human activity (Q4),1
+Meles meles,Low human activity (Q1),1
+Meles meles,High human activity (Q4),1
+Hystrix indica,Low human activity (Q1),0.9999999999999999
+Hystrix indica,High human activity (Q4),1

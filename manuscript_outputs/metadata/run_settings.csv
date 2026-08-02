@@ -1,0 +1,16 @@
+setting,value
+run_profile,publication
+capture_time_basis,Camelot camera-local time (Asia/Jerusalem)
+capture_input_md5,f54e92df14a6bcb1730ecb5474370db4
+seed,42
+part1_compareCkern_randomizations,9999
+part4_compareCkern_randomizations,999
+part6_compareCkern_randomizations,9999
+Dhat1_permutations,999
+nocturnality_bootstrap_replicates,4999
+interspecific_overlap_bootstrap_replicates,499
+Dhat1_overlap_bootstrap_replicates,1999
+delta1_threshold_smaller_event_sample,50
+activity_curve_grid_points,481
+Q1_Q4_cameras_per_group,15
+parallel_workers,4

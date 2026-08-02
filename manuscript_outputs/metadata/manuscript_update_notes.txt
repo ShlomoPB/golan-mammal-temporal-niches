@@ -1,0 +1,12 @@
+RUN PROFILE: publication. Publication outputs are valid only when RUN_PROFILE is publication.
+The submitted gazelle nocturnality change is reproduced from the camera-local timestamps: +1.07 h (95% CI 0.70 to 1.44).
+Capture times use Camelot camera-local time (Asia/Jerusalem). Do not add the Israel UTC+2/UTC+3 offset; Camelot timestamps are already local camera times.
+Figure 3 retains the author-requested badger contrast: High culling vs Low culling. The caption should not state that every panel is the minimum-overlap pair.
+Table A.5 and its caption should use Delta, not Dhat4, because low-event badger comparisons use Dhat1.
+Figure A.2 overlap and test values are reported in Table A.1, not Table A.2.
+Nocturnality CIs resample independent detection events uniformly and retain sighting quantity as an analysis weight. The Methods should not say that records were also sampled in proportion to group size.
+Standard overlapEst coefficients use independent detection events. The package does not support weights. Dhat4 randomization tests retain the original weighted compareCkern implementation; low-event Dhat1 tests use event-level permutation.
+The current CSV gives badger naive occupancy as 0.83 (unique occupied cameras / 60), not the submitted value 0.85.
+Using all human aliases defined in the analysis, the current CSV gives human naive occupancy as 0.95 (unique occupied cameras / 60), not the submitted value 0.88.
+Table 1 keeps the original test-specific uncertainty output and labels its source explicitly: Dhat4 rows report the standard deviation of the compareCkern randomization-null distribution, whereas low-event Dhat1 rows report a within-group bootstrap SE. These should not be described collectively as bootstrap SEs in the caption.
+The revised activity-curve figures show deterministic point-density curves and shaded overlap, but no bootstrap uncertainty envelopes. Remove the Methods statement that the displayed curves include bootstrap envelopes unless ribbons are restored.

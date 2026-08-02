@@ -1,0 +1,35 @@
+Package: golanDielActivity
+Type: Project
+Title: Mammalian Temporal Niches and Activity Shift under Culling and Land Management
+Version: 1.0.0
+Authors@R: c(
+    person("Shlomo", "Preiss-Bloom", role = c("aut", "cre"),
+           email = "preissbloom@tau.ac.il"),
+    person("Hila", "Shamon", role = "aut"),
+    person("Zachary", "Amir", role = "aut"),
+    person("Eamonn I.F.", "Wooster", role = "aut"),
+    person("Dror", "Ben-Ami", role = "aut"),
+    person("Tamar", "Dayan", role = "aut")
+    )
+Description: Reproducible analysis pipeline and manuscript outputs for mammal
+    diel activity, relative nocturnality, and temporal overlap across culling,
+    land-use, and human-activity gradients in the Golan Heights.
+License: file LICENSE
+Encoding: UTF-8
+Imports:
+    activity,
+    car,
+    dplyr,
+    emmeans,
+    ggplot2,
+    ggtext,
+    glmmTMB,
+    janitor,
+    overlap,
+    patchwork,
+    purrr,
+    readr,
+    Rcpp,
+    scales,
+    tibble,
+    tidyr

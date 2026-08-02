@@ -1,0 +1,34 @@
+# R and RStudio state
+.Rhistory
+.RData
+.RDataTmp
+.Rproj.user/
+.Ruserdata
+Rplots.pdf
+
+# Local package libraries and build products
+renv/library/
+renv/staging/
+.renv-bootstrap-lib/
+*.o
+*.so
+*.dll
+*.tmp
+
+# Local exploratory and legacy material retained outside the release
+/figures/
+/outputs/
+/plots/
+/*Part*.R
+/make_*.R
+/audit_*.R
+/compare_*.R
+/run_adaptive_*.R
+/run_part1_*.R
+/Making sure*.R
+/Independent_Captures_Sep_2025_solar.csv
+/SiteCovs_280825.csv
+
+# Codex-local configuration
+/.agents/
+/.codex/

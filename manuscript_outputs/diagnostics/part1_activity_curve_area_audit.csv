@@ -1,0 +1,29 @@
+species,land_use,area
+Canis aureus,High culling,1
+Canis aureus,Low culling,1
+Canis aureus,Minefields,1
+Canis aureus,Nature reserves,1
+Canis lupus,High culling,1
+Canis lupus,Low culling,1
+Canis lupus,Minefields,1
+Canis lupus,Nature reserves,1
+Gazella gazella,High culling,0.9999999999999999
+Gazella gazella,Low culling,1
+Gazella gazella,Minefields,1
+Gazella gazella,Nature reserves,0.9999999999999999
+Hystrix indica,High culling,1
+Hystrix indica,Low culling,1
+Hystrix indica,Minefields,1
+Hystrix indica,Nature reserves,1
+Meles meles,High culling,1
+Meles meles,Low culling,1
+Meles meles,Minefields,1
+Meles meles,Nature reserves,1
+Sus scrofa,High culling,1
+Sus scrofa,Low culling,1
+Sus scrofa,Minefields,1
+Sus scrofa,Nature reserves,1
+Vulpes vulpes,High culling,1
+Vulpes vulpes,Low culling,1
+Vulpes vulpes,Minefields,1
+Vulpes vulpes,Nature reserves,1

@@ -1,0 +1,2 @@
+mean_noct_Q1,mean_noct_Q4,delta_noct_Q4_minus_Q1,delta_CI_low,delta_CI_high,n_gazelle_events_Q1,n_gazelle_events_Q4,n_gazelle_individuals_Q1,n_gazelle_individuals_Q4,n_cameras_Q1,n_cameras_Q4,overlap_estimator,overlap_delta,overlap_p,nocturnality_p
+5.114228958036864,6.182000967733788,1.0677720096969239,0.7044501575456387,1.4438525751750357,960,483,1051,535,15,15,Dhat4,0.8096466975309904,0,2.0281885943030204e-8
