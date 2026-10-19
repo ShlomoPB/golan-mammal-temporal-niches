@@ -32,6 +32,24 @@ validate_analysis <- function(results) {
     "Table A.3 has 28 species-by-land-use rows",
     nrow(results$part2$species_land_use) == 28,
     paste("observed", nrow(results$part2$species_land_use)),
+    "Figure A.1 has 28 species-by-land-use contrast rows",
+    nrow(results$part2$figure_a1_contrasts) == 28,
+    paste("observed", nrow(results$part2$figure_a1_contrasts)),
+    "Figure A.1 minefield references are zero without uncertainty bars",
+    with(
+      results$part2$figure_a1_contrasts |>
+        filter(as.character(land_use) == "Minefields"),
+      all(contrast_vs_minefields == 0) &&
+        all(is.na(ci_low)) &&
+        all(is.na(ci_high))
+    ),
+    "all seven minefield references must be fixed at zero",
+    "Figure A.1 point estimates match corrected land-use means",
+    all(abs(
+      results$part2$figure_a1_contrasts$mean_nocturnality -
+        results$part2$species_land_use$mean
+    ) < 1e-12),
+    "absolute tolerance = 1e-12",
     "Table A.4 source has 84 pair-by-land-use rows",
     nrow(results$part5$overlaps) == 84,
     paste("observed", nrow(results$part5$overlaps)),

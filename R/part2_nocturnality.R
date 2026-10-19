@@ -136,23 +136,168 @@ run_part2 <- function(data) {
     height = 6.4
   )
 
-  figure_a1_data <- species_land_use |>
+  # Figure A.1 presents effect sizes directly. Each non-reference confidence
+  # interval is bootstrapped from the two underlying detection-event samples;
+  # it is not constructed by subtracting group-mean confidence limits.
+  set.seed(SEED + 201L)
+  figure_a1_data <- map_dfr(SPECIES, function(sp) {
+    species_data <- focal |>
+      filter(as.character(species) == sp)
+    minefield_data <- species_data |>
+      filter(as.character(land_use) == "Minefields")
+
+    map_dfr(LAND_USE_LEVELS, function(lu) {
+      land_use_data <- species_data |>
+        filter(as.character(land_use) == lu)
+      mean_nocturnality <- weighted_mean(
+        land_use_data$nocturnality_h,
+        land_use_data$sighting_quantity
+      )
+
+      if (lu == "Minefields") {
+        contrast <- tibble(
+          delta = 0,
+          delta_ci_low = NA_real_,
+          delta_ci_high = NA_real_
+        )
+      } else {
+        contrast <- weighted_difference_bootstrap(
+          minefield_data$nocturnality_h,
+          minefield_data$sighting_quantity,
+          land_use_data$nocturnality_h,
+          land_use_data$sighting_quantity
+        )
+      }
+
+      tibble(
+        species_source = sp,
+        species = unname(SPECIES_MANUSCRIPT[[sp]]),
+        land_use = lu,
+        mean_nocturnality = mean_nocturnality,
+        contrast_vs_minefields = contrast$delta,
+        ci_low = contrast$delta_ci_low,
+        ci_high = contrast$delta_ci_high
+      )
+    })
+  }) |>
     mutate(
-      species_label = paste0("<b><i>", as.character(species), "</i></b>"),
+      land_use = factor(land_use, levels = LAND_USE_LEVELS),
+      species_label = paste0("<b><i>", species, "</i></b>"),
       species_label = factor(
         species_label,
-        levels = paste0("<b><i>", SPECIES, "</i></b>")
+        levels = paste0(
+          "<b><i>",
+          unname(SPECIES_MANUSCRIPT[SPECIES]),
+          "</i></b>"
+        )
       )
     )
 
+  mean_validation <- figure_a1_data |>
+    left_join(
+      species_land_use |>
+        transmute(
+          species_source = as.character(species),
+          land_use = as.character(land_use),
+          corrected_mean = mean
+        ),
+      by = c("species_source", "land_use")
+    )
+  if (any(abs(
+    mean_validation$mean_nocturnality - mean_validation$corrected_mean
+  ) > 1e-12)) {
+    stop(
+      "Figure A.1 point estimates do not match the final corrected land-use means; ",
+      "the figure was not saved."
+    )
+  }
+
+  expected_rounded_contrasts <- tribble(
+    ~species_source, ~land_use, ~expected_contrast,
+    "Canis aureus", "High culling", 0.97,
+    "Canis aureus", "Low culling", 0.51,
+    "Canis aureus", "Nature reserves", 0.28,
+    "Canis aureus", "Minefields", 0,
+    "Canis lupus", "High culling", 0.54,
+    "Canis lupus", "Low culling", 0.41,
+    "Canis lupus", "Nature reserves", -0.04,
+    "Canis lupus", "Minefields", 0,
+    "Gazella gazella", "High culling", -0.31,
+    "Gazella gazella", "Low culling", -0.26,
+    "Gazella gazella", "Nature reserves", -0.05,
+    "Gazella gazella", "Minefields", 0,
+    "Hystrix indica", "High culling", 0.24,
+    "Hystrix indica", "Low culling", 0.44,
+    "Hystrix indica", "Nature reserves", 0.25,
+    "Hystrix indica", "Minefields", 0,
+    "Meles meles", "High culling", 0.36,
+    "Meles meles", "Low culling", 0.11,
+    "Meles meles", "Nature reserves", 0.56,
+    "Meles meles", "Minefields", 0,
+    "Sus scrofa", "High culling", 1.75,
+    "Sus scrofa", "Low culling", 1.42,
+    "Sus scrofa", "Nature reserves", 0.57,
+    "Sus scrofa", "Minefields", 0,
+    "Vulpes vulpes", "High culling", 0.15,
+    "Vulpes vulpes", "Low culling", -0.03,
+    "Vulpes vulpes", "Nature reserves", 0.25,
+    "Vulpes vulpes", "Minefields", 0
+  )
+  contrast_discrepancies <- figure_a1_data |>
+    mutate(land_use = as.character(land_use)) |>
+    inner_join(
+      expected_rounded_contrasts,
+      by = c("species_source", "land_use")
+    ) |>
+    filter(abs(contrast_vs_minefields - expected_contrast) > 0.015)
+  if (nrow(contrast_discrepancies)) {
+    print(contrast_discrepancies, n = Inf)
+    stop(
+      "Figure A.1 contrasts differ from the final manuscript checks; ",
+      "the figure was not saved."
+    )
+  }
+
+  figure_a1_validation <- figure_a1_data |>
+    transmute(
+      species,
+      land_use_category = as.character(land_use),
+      mean_nocturnality,
+      contrast_vs_minefields,
+      lower_95_CI = ci_low,
+      upper_95_CI = ci_high
+    )
+  write_csv(
+    figure_a1_validation,
+    file.path(
+      OUTPUT_DIRS$diagnostics,
+      "Figure_A1_nocturnality_contrasts_validation.csv"
+    )
+  )
+  message(
+    "  Figure A.1 validation passed: all means match the corrected Part 2 ",
+    "values and all contrasts match the manuscript checks."
+  )
+
   figure_a1 <- ggplot(
     figure_a1_data,
-    aes(land_use, mean, group = species)
+    aes(land_use, contrast_vs_minefields, group = species)
   ) +
-    geom_hline(yintercept = seq(0, 12, 2), color = "grey92", linewidth = 0.35) +
-    geom_errorbar(aes(ymin = ci_low, ymax = ci_high), width = 0.08, linewidth = 0.55) +
+    geom_hline(
+      yintercept = 0,
+      linetype = "dashed",
+      color = "grey40",
+      linewidth = 0.55
+    ) +
+    geom_errorbar(
+      data = figure_a1_data |>
+        filter(as.character(land_use) != "Minefields"),
+      aes(ymin = ci_low, ymax = ci_high),
+      width = 0.08,
+      linewidth = 0.65
+    ) +
     geom_line(color = "grey35", linewidth = 0.7) +
-    geom_point(size = 2.2, color = "#3F7FB5") +
+    geom_point(size = 2.5, color = "#3F7FB5") +
     facet_wrap(~species_label, ncol = 3) +
     scale_x_discrete(labels = c(
       "High culling" = "High\nculling",
@@ -160,16 +305,40 @@ run_part2 <- function(data) {
       "Nature reserves" = "Nature\nreserves",
       "Minefields" = "Minefields"
     )) +
-    coord_cartesian(ylim = c(4.5, 10)) +
-    labs(x = "Land-use category", y = "Relative nocturnality (h from solar noon)") +
+    labs(
+      x = "Land-use category",
+      y = "Change in nocturnality relative to minefields (h)",
+      subtitle = paste(
+        "Points show mean change in nocturnality relative to minefields;",
+        "error bars indicate 95% bootstrap confidence intervals."
+      )
+    ) +
     theme_bw(base_size = 14) +
     theme(
       strip.text = ggtext::element_markdown(size = 13),
       panel.grid.minor = element_blank(),
       panel.grid.major.x = element_blank(),
       axis.text.x = element_text(size = 10),
-      axis.title = element_text(size = 14)
+      axis.title = element_text(size = 14),
+      plot.subtitle = element_text(size = 12.5, margin = margin(b = 8))
     )
+
+  figure_a1_caption <- paste(
+    "Figure A.1. Within-species change in nocturnality across land-use types.",
+    "Points show mean change in nocturnality relative to minefields, measured",
+    "as absolute hours from solar noon. Positive values indicate greater",
+    "nocturnality than in minefields and negative values indicate less",
+    "nocturnality. Error bars indicate 95% bootstrap confidence intervals.",
+    "Minefields are the reference category and are therefore fixed at zero."
+  )
+  writeLines(
+    figure_a1_caption,
+    file.path(
+      OUTPUT_DIRS$supplementary_figures,
+      "Figure_A1_caption.txt"
+    ),
+    useBytes = TRUE
+  )
   save_figure(
     figure_a1,
     file.path(OUTPUT_DIRS$supplementary_figures, "Figure_A1_nocturnality_by_land_use"),
@@ -179,6 +348,7 @@ run_part2 <- function(data) {
 
   list(
     species_land_use = species_land_use,
+    figure_a1_contrasts = figure_a1_data,
     community_land_use = community_land_use,
     slopes = slopes
   )

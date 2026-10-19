@@ -7,6 +7,9 @@ Table 1 has 42 species-by-pair rows,TRUE,observed 42
 Table A.1 has seven species,TRUE,observed 7
 Table A.2 has seven species plus humans,TRUE,observed 8
 Table A.3 has 28 species-by-land-use rows,TRUE,observed 28
+Figure A.1 has 28 species-by-land-use contrast rows,TRUE,observed 28
+Figure A.1 minefield references are zero without uncertainty bars,TRUE,all seven minefield references must be fixed at zero
+Figure A.1 point estimates match corrected land-use means,TRUE,absolute tolerance = 1e-12
 Table A.4 source has 84 pair-by-land-use rows,TRUE,observed 84
 All Part 1 density curves integrate to one,TRUE,tolerance = 0.002
 All Part 4 density curves integrate to one,TRUE,tolerance = 0.002

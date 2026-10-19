@@ -96,6 +96,18 @@ SPECIES_ABBREVIATED <- c(
   "Hystrix indica" = "H. indica"
 )
 
+# Data retain the taxon name used at export, while manuscript-facing labels
+# use the taxonomy adopted in the revised manuscript.
+SPECIES_MANUSCRIPT <- c(
+  "Canis lupus" = "Canis lupus",
+  "Canis aureus" = "Canis aureus",
+  "Sus scrofa" = "Sus scrofa",
+  "Gazella gazella" = "Gazella gazella",
+  "Vulpes vulpes" = "Vulpes vulpes",
+  "Meles meles" = "Meles canescens",
+  "Hystrix indica" = "Hystrix indica"
+)
+
 LAND_USE_LEVELS <- c(
   "High culling",
   "Low culling",
