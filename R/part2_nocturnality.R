@@ -137,7 +137,8 @@ run_part2 <- function(data) {
   )
 
   # Figure A.1 presents effect sizes directly. Each non-reference confidence
-  # interval is bootstrapped from the two underlying detection-event samples;
+  # interval uses probability-proportional-to-group-size resampling of both
+  # underlying event samples and then calculates their weighted-mean contrast;
   # it is not constructed by subtracting group-mean confidence limits.
   set.seed(SEED + 201L)
   figure_a1_data <- map_dfr(SPECIES, function(sp) {
@@ -161,7 +162,7 @@ run_part2 <- function(data) {
           delta_ci_high = NA_real_
         )
       } else {
-        contrast <- weighted_difference_bootstrap(
+        contrast <- weighted_difference_bootstrap_pps(
           minefield_data$nocturnality_h,
           minefield_data$sighting_quantity,
           land_use_data$nocturnality_h,
@@ -171,7 +172,7 @@ run_part2 <- function(data) {
 
       tibble(
         species_source = sp,
-        species = unname(SPECIES_MANUSCRIPT[[sp]]),
+        species = unname(FIGURE_A1_COMMON_NAMES[[sp]]),
         land_use = lu,
         mean_nocturnality = mean_nocturnality,
         contrast_vs_minefields = contrast$delta,
@@ -182,13 +183,13 @@ run_part2 <- function(data) {
   }) |>
     mutate(
       land_use = factor(land_use, levels = LAND_USE_LEVELS),
-      species_label = paste0("<b><i>", species, "</i></b>"),
+      species_label = paste0("<b>", species, "</b>"),
       species_label = factor(
         species_label,
         levels = paste0(
-          "<b><i>",
-          unname(SPECIES_MANUSCRIPT[SPECIES]),
-          "</i></b>"
+          "<b>",
+          unname(FIGURE_A1_COMMON_NAMES[SPECIES]),
+          "</b>"
         )
       )
     )
@@ -274,6 +275,27 @@ run_part2 <- function(data) {
       "Figure_A1_nocturnality_contrasts_validation.csv"
     )
   )
+  estimates_outside_ci <- figure_a1_validation |>
+    filter(
+      land_use_category != "Minefields",
+      contrast_vs_minefields < lower_95_CI |
+        contrast_vs_minefields > upper_95_CI
+    )
+  if (nrow(estimates_outside_ci)) {
+    warning(
+      "Figure A.1 PPS bootstrap percentile CI excludes the observed contrast for: ",
+      paste(
+        paste0(
+          estimates_outside_ci$species,
+          " (",
+          estimates_outside_ci$land_use_category,
+          ")"
+        ),
+        collapse = "; "
+      ),
+      ". This is retained and reported rather than silently adjusted."
+    )
+  }
   message(
     "  Figure A.1 validation passed: all means match the corrected Part 2 ",
     "values and all contrasts match the manuscript checks."

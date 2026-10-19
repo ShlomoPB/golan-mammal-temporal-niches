@@ -8,6 +8,7 @@ part4_compareCkern_randomizations,999
 part6_compareCkern_randomizations,9999
 Dhat1_permutations,999
 nocturnality_bootstrap_replicates,4999
+figure_A1_bootstrap_sampling,replacement sampling proportional to sighting_quantity; weighted mean statistic
 interspecific_overlap_bootstrap_replicates,499
 Dhat1_overlap_bootstrap_replicates,1999
 delta1_threshold_smaller_event_sample,50

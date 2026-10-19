@@ -88,9 +88,12 @@ event sample has fewer than 50 observations; Delta-hat 4 is used otherwise.
 Nocturnality is absolute circular distance in hours from solar noon, where 0 is
 solar noon and 12 is solar midnight.
 
-Bootstrap samples resample independent detection events uniformly while group
-size remains an analysis weight. The metadata and table captions distinguish
-the uncertainty procedures used by Delta-hat 1 and Delta-hat 4 analyses.
+Unless an output states otherwise, bootstrap samples resample independent
+detection events uniformly while group size remains an analysis weight. Figure
+A.1 follows the final manuscript Methods literally: detections are resampled
+with replacement using probabilities proportional to group size, and group
+size remains the weight in each bootstrap weighted mean. The metadata and table
+captions distinguish the uncertainty procedures used by other analyses.
 
 ## Generated outputs
 

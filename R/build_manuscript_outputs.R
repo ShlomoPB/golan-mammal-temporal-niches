@@ -260,6 +260,7 @@ write_reproducibility_metadata <- function(results) {
       "part6_compareCkern_randomizations",
       "Dhat1_permutations",
       "nocturnality_bootstrap_replicates",
+      "figure_A1_bootstrap_sampling",
       "interspecific_overlap_bootstrap_replicates",
       "Dhat1_overlap_bootstrap_replicates",
       "delta1_threshold_smaller_event_sample",
@@ -277,6 +278,10 @@ write_reproducibility_metadata <- function(results) {
       N_RANDOMIZATIONS_PART6,
       N_RANDOMIZATIONS_DHAT1,
       N_BOOT_NOCTURNALITY,
+      paste(
+        "replacement sampling proportional to sighting_quantity;",
+        "weighted mean statistic"
+      ),
       N_BOOT_INTERSPECIES_OVERLAP,
       N_BOOT_DHAT1,
       DELTA1_THRESHOLD,

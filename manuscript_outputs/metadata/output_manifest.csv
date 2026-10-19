@@ -7,7 +7,7 @@ additional_results/part2_nocturnality_gradient_slopes.csv,1238
 additional_results/part4_all_pressure_overlap_tests.csv,4794
 additional_results/part5_pairwise_species_overlap_long.csv,12174
 additional_results/part6_gazelle_reserve_overlap_test.csv,429
-diagnostics/Figure_A1_nocturnality_contrasts_validation.csv,2629
+diagnostics/Figure_A1_nocturnality_contrasts_validation.csv,2654
 diagnostics/Table_B1_camera_assignments.csv,2187
 diagnostics/focal_exact_cross_session_duplicates_collapsed.csv,475
 diagnostics/part1_activity_curve_area_audit.csv,848
@@ -39,14 +39,14 @@ metadata/compareCkern_backend_validation.csv,110
 metadata/environment_notes.txt,117
 metadata/external_assets.csv,229
 metadata/manuscript_result_edit_checklist.md,8082
-metadata/manuscript_update_notes.txt,2019
+metadata/manuscript_update_notes.txt,2316
 metadata/package_versions.csv,229
-metadata/run_settings.csv,542
+metadata/run_settings.csv,651
 metadata/sessionInfo.txt,2602
 metadata/source_checksums.csv,1053
 supplementary_figures/Figure_A1_caption.txt,422
-supplementary_figures/Figure_A1_nocturnality_by_land_use.pdf,39890
-supplementary_figures/Figure_A1_nocturnality_by_land_use.png,247856
+supplementary_figures/Figure_A1_nocturnality_by_land_use.pdf,40299
+supplementary_figures/Figure_A1_nocturnality_by_land_use.png,241010
 supplementary_figures/Figure_A2_activity_by_human_activity.pdf,97528
 supplementary_figures/Figure_A2_activity_by_human_activity.png,609604
 supplementary_tables/Table_A1_species_responses_to_human_activity.csv,1414

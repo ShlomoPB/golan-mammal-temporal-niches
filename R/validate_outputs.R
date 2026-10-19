@@ -241,9 +241,26 @@ validate_analysis <- function(results) {
       "Figure A.2 overlap and test values are reported in Table A.1, not Table A.2."
     ),
     paste0(
-      "Nocturnality CIs resample independent detection events uniformly and ",
-      "retain sighting quantity as an analysis weight. The Methods should not ",
-      "say that records were also sampled in proportion to group size."
+      "Figure A.1 contrast CIs follow the final Methods literally: detection ",
+      "events are resampled with probability proportional to sighting ",
+      "quantity, and sighting quantity remains the weighted-mean analysis ",
+      "weight. This is not equivalent to uniform event resampling."
+    ),
+    paste0(
+      "The Figure A.1 PPS percentile CI excludes its observed contrast for: ",
+      paste(
+        results$part2$figure_a1_contrasts |>
+          filter(
+            as.character(land_use) != "Minefields",
+            contrast_vs_minefields < ci_low |
+              contrast_vs_minefields > ci_high
+          ) |>
+          transmute(label = paste0(species, " (", land_use, ")")) |>
+          pull(label),
+        collapse = "; "
+      ),
+      ". This is a consequence of applying group size in both resampling and ",
+      "the weighted statistic and is retained rather than silently adjusted."
     ),
     paste0(
       "Standard overlapEst coefficients use independent detection events. ",
