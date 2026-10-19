@@ -50,6 +50,25 @@ validate_analysis <- function(results) {
         results$part2$species_land_use$mean
     ) < 1e-12),
     "absolute tolerance = 1e-12",
+    "Figure A.1 sample sizes match Table A.3",
+    all(
+      results$part2$figure_a1_contrasts$n_detections ==
+        results$part2$species_land_use$n_events &
+        results$part2$figure_a1_contrasts$sum_group_size_weights ==
+          results$part2$species_land_use$n_individuals
+    ),
+    "event counts and sums of group-size weights must match",
+    "Every Figure A.1 estimate lies within its contrast CI",
+    RUN_PROFILE != "publication" || with(
+      results$part2$figure_a1_contrasts |>
+        filter(as.character(land_use) != "Minefields"),
+      all(contrast_vs_minefields >= ci_low & contrast_vs_minefields <= ci_high)
+    ),
+    if (RUN_PROFILE == "publication") {
+      "all 21 non-reference estimates must be bounded by their CIs"
+    } else {
+      "publication-only CI-bound check skipped for nine-draw check profile"
+    },
     "Table A.4 source has 84 pair-by-land-use rows",
     nrow(results$part5$overlaps) == 84,
     paste("observed", nrow(results$part5$overlaps)),
@@ -241,26 +260,10 @@ validate_analysis <- function(results) {
       "Figure A.2 overlap and test values are reported in Table A.1, not Table A.2."
     ),
     paste0(
-      "Figure A.1 contrast CIs follow the final Methods literally: detection ",
-      "events are resampled with probability proportional to sighting ",
-      "quantity, and sighting quantity remains the weighted-mean analysis ",
-      "weight. This is not equivalent to uniform event resampling."
-    ),
-    paste0(
-      "The Figure A.1 PPS percentile CI excludes its observed contrast for: ",
-      paste(
-        results$part2$figure_a1_contrasts |>
-          filter(
-            as.character(land_use) != "Minefields",
-            contrast_vs_minefields < ci_low |
-              contrast_vs_minefields > ci_high
-          ) |>
-          transmute(label = paste0(species, " (", land_use, ")")) |>
-          pull(label),
-        collapse = "; "
-      ),
-      ". This is a consequence of applying group size in both resampling and ",
-      "the weighted statistic and is retained rather than silently adjusted."
+      "Figure A.1 and Table A.3 descriptive CIs use independent detection ",
+      "events as the uniform replacement-sampling unit. Sighting quantity is ",
+      "used once, as the weighted-mean analysis weight; it is not used as a ",
+      "resampling probability."
     ),
     paste0(
       "Standard overlapEst coefficients use independent detection events. ",

@@ -82,53 +82,6 @@ weighted_difference_bootstrap <- function(
   tibble(delta = estimate, delta_ci_low = ci[1], delta_ci_high = ci[2])
 }
 
-weighted_difference_bootstrap_pps <- function(
-    x_reference, w_reference, x_comparison, w_comparison,
-    reps = N_BOOT_NOCTURNALITY) {
-  keep_reference <- is.finite(x_reference) &
-    is.finite(w_reference) & w_reference > 0
-  keep_comparison <- is.finite(x_comparison) &
-    is.finite(w_comparison) & w_comparison > 0
-  x_reference <- as.numeric(x_reference[keep_reference])
-  w_reference <- as.numeric(w_reference[keep_reference])
-  x_comparison <- as.numeric(x_comparison[keep_comparison])
-  w_comparison <- as.numeric(w_comparison[keep_comparison])
-  if (!length(x_reference) || !length(x_comparison)) {
-    stop("Both groups require at least one finite, positively weighted event.")
-  }
-
-  estimate <- weighted_mean(x_comparison, w_comparison) -
-    weighted_mean(x_reference, w_reference)
-  n_reference <- length(x_reference)
-  n_comparison <- length(x_comparison)
-  draws <- replicate(reps, {
-    # This implements the final Methods literally: detection records are
-    # selected with probability proportional to group size, and group size
-    # remains the weight in the mean calculated from each bootstrap sample.
-    id_reference <- sample.int(
-      n_reference,
-      n_reference,
-      replace = TRUE,
-      prob = w_reference
-    )
-    id_comparison <- sample.int(
-      n_comparison,
-      n_comparison,
-      replace = TRUE,
-      prob = w_comparison
-    )
-    weighted_mean(
-      x_comparison[id_comparison],
-      w_comparison[id_comparison]
-    ) - weighted_mean(
-      x_reference[id_reference],
-      w_reference[id_reference]
-    )
-  })
-  ci <- quantile(draws, c(0.025, 0.975), na.rm = TRUE, names = FALSE)
-  tibble(delta = estimate, delta_ci_low = ci[1], delta_ci_high = ci[2])
-}
-
 select_extreme_cameras <- function(site_covs, covariate, n_each = N_Q_EXTREME_CAMERAS) {
   ranked <- site_covs |>
     transmute(

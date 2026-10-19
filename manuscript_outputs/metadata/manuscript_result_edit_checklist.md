@@ -179,9 +179,11 @@ with the corrected analysis:
   events without group-size weights because that function does not support
   weights. The weighted curve displays and weighted Delta-hat 4
   `compareCkern()` tests retain `sighting_quantity` as the analysis weight.
-- For nocturnality confidence intervals, say that independent detection
-  events were resampled uniformly and `sighting_quantity` was retained as the
-  analysis weight. Events were not also sampled in proportion to group size.
+- Replace the descriptive-nocturnality bootstrap sentence with: "For
+  descriptive summaries, land-use means and 95% bootstrap CIs were estimated
+  by resampling independent detections with replacement and recalculating
+  group-size-weighted means." Events were not also sampled in proportion to
+  group size.
 
 ## Conclusions that remain supported
 

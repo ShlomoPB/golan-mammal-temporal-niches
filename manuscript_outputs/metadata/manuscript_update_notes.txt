@@ -4,8 +4,7 @@ Capture times use Camelot camera-local time (Asia/Jerusalem). Do not add the Isr
 Figure 3 retains the author-requested badger contrast: High culling vs Low culling. The caption should not state that every panel is the minimum-overlap pair.
 Table A.5 and its caption should use Delta, not Dhat4, because low-event badger comparisons use Dhat1.
 Figure A.2 overlap and test values are reported in Table A.1, not Table A.2.
-Figure A.1 contrast CIs follow the final Methods literally: detection events are resampled with probability proportional to sighting quantity, and sighting quantity remains the weighted-mean analysis weight. This is not equivalent to uniform event resampling.
-The Figure A.1 PPS percentile CI excludes its observed contrast for: Mountain gazelle (High culling). This is a consequence of applying group size in both resampling and the weighted statistic and is retained rather than silently adjusted.
+Figure A.1 and Table A.3 descriptive CIs use independent detection events as the uniform replacement-sampling unit. Sighting quantity is used once, as the weighted-mean analysis weight; it is not used as a resampling probability.
 Standard overlapEst coefficients use independent detection events. The package does not support weights. Dhat4 randomization tests retain the original weighted compareCkern implementation; low-event Dhat1 tests use event-level permutation.
 The current CSV gives badger naive occupancy as 0.83 (unique occupied cameras / 60), not the submitted value 0.85.
 Using all human aliases defined in the analysis, the current CSV gives human naive occupancy as 0.95 (unique occupied cameras / 60), not the submitted value 0.88.

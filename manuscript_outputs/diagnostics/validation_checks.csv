@@ -10,6 +10,8 @@ Table A.3 has 28 species-by-land-use rows,TRUE,observed 28
 Figure A.1 has 28 species-by-land-use contrast rows,TRUE,observed 28
 Figure A.1 minefield references are zero without uncertainty bars,TRUE,all seven minefield references must be fixed at zero
 Figure A.1 point estimates match corrected land-use means,TRUE,absolute tolerance = 1e-12
+Figure A.1 sample sizes match Table A.3,TRUE,event counts and sums of group-size weights must match
+Every Figure A.1 estimate lies within its contrast CI,TRUE,all 21 non-reference estimates must be bounded by their CIs
 Table A.4 source has 84 pair-by-land-use rows,TRUE,observed 84
 All Part 1 density curves integrate to one,TRUE,tolerance = 0.002
 All Part 4 density curves integrate to one,TRUE,tolerance = 0.002

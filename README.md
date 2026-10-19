@@ -88,12 +88,12 @@ event sample has fewer than 50 observations; Delta-hat 4 is used otherwise.
 Nocturnality is absolute circular distance in hours from solar noon, where 0 is
 solar noon and 12 is solar midnight.
 
-Unless an output states otherwise, bootstrap samples resample independent
-detection events uniformly while group size remains an analysis weight. Figure
-A.1 follows the final manuscript Methods literally: detections are resampled
-with replacement using probabilities proportional to group size, and group
-size remains the weight in each bootstrap weighted mean. The metadata and table
-captions distinguish the uncertainty procedures used by other analyses.
+For descriptive summaries, land-use means and 95% bootstrap CIs are estimated
+by resampling independent detections with replacement and recalculating
+group-size-weighted means. Figure A.1 applies the same procedure independently
+to each land-use category and its minefield reference, then calculates each
+replicate contrast. The metadata and table captions distinguish the uncertainty
+procedures used by other analyses.
 
 ## Generated outputs
 

@@ -279,8 +279,8 @@ write_reproducibility_metadata <- function(results) {
       N_RANDOMIZATIONS_DHAT1,
       N_BOOT_NOCTURNALITY,
       paste(
-        "replacement sampling proportional to sighting_quantity;",
-        "weighted mean statistic"
+        "uniform replacement sampling of independent detections;",
+        "sighting_quantity used only in the weighted mean statistic"
       ),
       N_BOOT_INTERSPECIES_OVERLAP,
       N_BOOT_DHAT1,
@@ -406,6 +406,7 @@ write_reproducibility_metadata <- function(results) {
     DATA_SITECOVS,
     file.path(PROJECT_DIR, "run_all.R"),
     file.path(PROJECT_DIR, "README.md"),
+    file.path(PROJECT_DIR, "supplementary_methods_missing_details.md"),
     file.path(PROJECT_DIR, "renv.lock"),
     file.path(PROJECT_DIR, "data", "README.md"),
     file.path(PROJECT_DIR, "DESCRIPTION"),

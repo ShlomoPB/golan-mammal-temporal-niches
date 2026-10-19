@@ -136,10 +136,10 @@ run_part2 <- function(data) {
     height = 6.4
   )
 
-  # Figure A.1 presents effect sizes directly. Each non-reference confidence
-  # interval uses probability-proportional-to-group-size resampling of both
-  # underlying event samples and then calculates their weighted-mean contrast;
-  # it is not constructed by subtracting group-mean confidence limits.
+  # Figure A.1 presents effect sizes directly. Independent detection events
+  # are sampled uniformly within each group, and group size is used once as
+  # the analysis weight in each bootstrap weighted mean. Contrast intervals
+  # come from replicate contrasts, not subtraction of group-mean CI limits.
   set.seed(SEED + 201L)
   figure_a1_data <- map_dfr(SPECIES, function(sp) {
     species_data <- focal |>
@@ -162,7 +162,7 @@ run_part2 <- function(data) {
           delta_ci_high = NA_real_
         )
       } else {
-        contrast <- weighted_difference_bootstrap_pps(
+        contrast <- weighted_difference_bootstrap(
           minefield_data$nocturnality_h,
           minefield_data$sighting_quantity,
           land_use_data$nocturnality_h,
@@ -177,7 +177,9 @@ run_part2 <- function(data) {
         mean_nocturnality = mean_nocturnality,
         contrast_vs_minefields = contrast$delta,
         ci_low = contrast$delta_ci_low,
-        ci_high = contrast$delta_ci_high
+        ci_high = contrast$delta_ci_high,
+        n_detections = nrow(land_use_data),
+        sum_group_size_weights = sum(land_use_data$sighting_quantity)
       )
     })
   }) |>
@@ -200,7 +202,9 @@ run_part2 <- function(data) {
         transmute(
           species_source = as.character(species),
           land_use = as.character(land_use),
-          corrected_mean = mean
+          corrected_mean = mean,
+          corrected_n_detections = n_events,
+          corrected_sum_group_size_weights = n_individuals
         ),
       by = c("species_source", "land_use")
     )
@@ -210,6 +214,15 @@ run_part2 <- function(data) {
     stop(
       "Figure A.1 point estimates do not match the final corrected land-use means; ",
       "the figure was not saved."
+    )
+  }
+  if (any(
+    mean_validation$n_detections != mean_validation$corrected_n_detections |
+      mean_validation$sum_group_size_weights !=
+        mean_validation$corrected_sum_group_size_weights
+  )) {
+    stop(
+      "Figure A.1 sample sizes do not match Table A.3; the figure was not saved."
     )
   }
 
@@ -263,10 +276,12 @@ run_part2 <- function(data) {
     transmute(
       species,
       land_use_category = as.character(land_use),
-      mean_nocturnality,
+      weighted_mean_nocturnality = mean_nocturnality,
       contrast_vs_minefields,
       lower_95_CI = ci_low,
-      upper_95_CI = ci_high
+      upper_95_CI = ci_high,
+      number_of_detections = n_detections,
+      sum_of_group_size_weights = sum_group_size_weights
     )
   write_csv(
     figure_a1_validation,
@@ -282,8 +297,9 @@ run_part2 <- function(data) {
         contrast_vs_minefields > upper_95_CI
     )
   if (nrow(estimates_outside_ci)) {
-    warning(
-      "Figure A.1 PPS bootstrap percentile CI excludes the observed contrast for: ",
+    print(estimates_outside_ci, n = Inf)
+    stop(
+      "Figure A.1 bootstrap percentile CI excludes the observed contrast for: ",
       paste(
         paste0(
           estimates_outside_ci$species,
@@ -293,12 +309,13 @@ run_part2 <- function(data) {
         ),
         collapse = "; "
       ),
-      ". This is retained and reported rather than silently adjusted."
+      ". The figure was not saved; review the estimator and data."
     )
   }
   message(
     "  Figure A.1 validation passed: all means match the corrected Part 2 ",
-    "values and all contrasts match the manuscript checks."
+    "values, all contrasts match the manuscript checks, and every ",
+    "non-reference point lies within its bootstrap CI."
   )
 
   figure_a1 <- ggplot(
