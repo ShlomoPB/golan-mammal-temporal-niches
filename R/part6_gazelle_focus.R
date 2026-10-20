@@ -53,7 +53,7 @@ run_part6 <- function(data, part4) {
     labs(
       title = "(A) All land-use types",
       x = "Solar time",
-      y = "Gazelle temporal activity density"
+      y = "Mountain gazelle temporal activity density"
     ) +
     theme_bw(base_size = 18) +
     theme(
@@ -153,7 +153,7 @@ run_part6 <- function(data, part4) {
     labs(
       title = "(B) Nature reserves",
       x = "Solar time",
-      y = "Gazelle temporal activity density"
+      y = "Mountain gazelle temporal activity density"
     ) +
     theme_bw(base_size = 18) +
     theme(

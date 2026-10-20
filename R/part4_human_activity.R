@@ -140,13 +140,12 @@ run_part4 <- function(data) {
       species = factor(species, levels = SPECIES),
       group = factor(group, levels = names(HUMAN_ACTIVITY_COLORS)),
       panel = paste0(
-        "italic(",
-        gsub(" ", "~", as.character(species)),
-        ")*'  (n = ",
+        unname(SPECIES_COMMON[as.character(species)]),
+        " (n = ",
         n_low,
         " / ",
         n_high,
-        ")'"
+        ")"
       )
     )
   panel_levels <- curves |>
@@ -215,7 +214,7 @@ run_part4 <- function(data) {
       lineheight = 1,
       size = 4
     ) +
-    facet_wrap(~panel, ncol = 3, scales = "free_y", labeller = label_parsed) +
+    facet_wrap(~panel, ncol = 3, scales = "free_y") +
     scale_color_manual(values = HUMAN_ACTIVITY_COLORS, name = NULL) +
     scale_x_continuous(
       breaks = c(0, 6, 12, 18, 24),
@@ -240,7 +239,7 @@ run_part4 <- function(data) {
     ) +
     theme_bw(base_size = 15) +
     theme(
-      strip.text = element_text(size = 12.5),
+      strip.text = element_text(size = 12.5, face = "bold"),
       panel.grid.minor = element_blank(),
       legend.position = "inside",
       legend.position.inside = c(0.70, 0.18),

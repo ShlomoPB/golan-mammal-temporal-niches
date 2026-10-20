@@ -87,9 +87,7 @@ build_detection_outputs <- function(data) {
         "Indian crested<br>porcupine",
         common_name
       ),
-      label = paste0(
-        "<b>", common_name_plot, "</b><br><i>", as.character(species), "</i>"
-      )
+      label = paste0("<b>", common_name_plot, "</b>")
     )
   label_levels <- focal_summary |>
     mutate(
@@ -99,9 +97,7 @@ build_detection_outputs <- function(data) {
         "Indian crested<br>porcupine",
         common_name
       ),
-      label = paste0(
-        "<b>", common_name_plot, "</b><br><i>", as.character(species), "</i>"
-      )
+      label = paste0("<b>", common_name_plot, "</b>")
     ) |>
     arrange(species) |>
     pull(label)
@@ -114,7 +110,7 @@ build_detection_outputs <- function(data) {
         "Indian crested<br>porcupine",
         common_name
       ),
-      label = paste0("<b>", common_name_plot, "</b><br><i>", species, "</i>"),
+      label = paste0("<b>", common_name_plot, "</b>"),
       label = factor(label, levels = label_levels),
       right_label = paste0(
         "n = ", comma(independent_observations),

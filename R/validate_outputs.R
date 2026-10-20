@@ -8,6 +8,20 @@ validate_analysis <- function(results) {
     "Four land-use categories",
     n_distinct(results$data$focal$land_use) == 4,
     paste("observed", n_distinct(results$data$focal$land_use)),
+    "Figure labels use the seven final common names",
+    identical(
+      unname(SPECIES_COMMON[SPECIES]),
+      c(
+        "Grey wolf",
+        "Golden jackal",
+        "Wild boar",
+        "Mountain gazelle",
+        "Red fox",
+        "Caucasian badger",
+        "Indian crested porcupine"
+      )
+    ),
+    "common-name taxonomy and species order must match the revised manuscript",
     "60 camera stations",
     n_distinct(results$data$site_covs$camera_name) == 60,
     paste("observed", n_distinct(results$data$site_covs$camera_name)),

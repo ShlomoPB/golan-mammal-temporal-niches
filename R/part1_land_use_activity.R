@@ -118,9 +118,9 @@ run_part1 <- function(data) {
       mutate(
         species_order = as.integer(row$species),
         panel = paste0(
-          letters[i], ". <b><i>",
-          as.character(row$species),
-          "</i></b><br>",
+          letters[i], ". <b>",
+          unname(SPECIES_COMMON[as.character(row$species)]),
+          "</b><br>",
           row$group1,
           " vs ",
           row$group2

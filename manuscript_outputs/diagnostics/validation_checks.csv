@@ -1,6 +1,7 @@
 check,passed,detail
 Seven focal species,TRUE,observed 7
 Four land-use categories,TRUE,observed 4
+Figure labels use the seven final common names,TRUE,common-name taxonomy and species order must match the revised manuscript
 60 camera stations,TRUE,observed 60
 One exact cross-session focal event is collapsed,TRUE,2 export rows representing one wild-boar event
 Table 1 has 42 species-by-pair rows,TRUE,observed 42

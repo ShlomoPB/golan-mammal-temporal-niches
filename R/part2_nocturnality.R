@@ -92,11 +92,14 @@ run_part2 <- function(data) {
       species_label = if_else(
         as.character(species) == "Community",
         "<b>Community</b>",
-        paste0("<i>", as.character(species), "</i>")
+        paste0("<b>", unname(SPECIES_COMMON[as.character(species)]), "</b>")
       ),
       species_label = factor(
         species_label,
-        levels = c("<b>Community</b>", paste0("<i>", rev(SPECIES), "</i>"))
+        levels = c(
+          "<b>Community</b>",
+          paste0("<b>", unname(SPECIES_COMMON[rev(SPECIES)]), "</b>")
+        )
       ),
       group = case_when(
         as.character(species) == "Community" ~ "Community",
@@ -172,7 +175,7 @@ run_part2 <- function(data) {
 
       tibble(
         species_source = sp,
-        species = unname(FIGURE_A1_COMMON_NAMES[[sp]]),
+        species = unname(SPECIES_COMMON[[sp]]),
         land_use = lu,
         mean_nocturnality = mean_nocturnality,
         contrast_vs_minefields = contrast$delta,
@@ -190,7 +193,7 @@ run_part2 <- function(data) {
         species_label,
         levels = paste0(
           "<b>",
-          unname(FIGURE_A1_COMMON_NAMES[SPECIES]),
+          unname(SPECIES_COMMON[SPECIES]),
           "</b>"
         )
       )

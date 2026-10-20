@@ -295,13 +295,13 @@ run_part5 <- function(data) {
       ) +
       scale_x_continuous(
         breaks = seq_along(SPECIES),
-        labels = unname(SPECIES_ABBREVIATED[SPECIES]),
+        labels = unname(SPECIES_COMMON_WRAPPED[SPECIES]),
         limits = c(0.5, length(SPECIES) + 0.5),
         expand = c(0, 0)
       ) +
       scale_y_reverse(
         breaks = seq_along(SPECIES),
-        labels = unname(SPECIES_ABBREVIATED[SPECIES]),
+        labels = unname(SPECIES_COMMON_WRAPPED[SPECIES]),
         limits = c(length(SPECIES) + 0.5, 0.5),
         expand = c(0, 0)
       ) +
@@ -311,14 +311,20 @@ run_part5 <- function(data) {
       theme(
         plot.title = element_text(face = "bold", size = 19, hjust = 0.5),
         axis.text.x = element_text(
-          face = "italic",
+          face = "plain",
           color = "black",
-          size = 13,
+          size = if (include_legend) 11 else 9.5,
           angle = 45,
           hjust = 1,
-          vjust = 1
+          vjust = 1,
+          lineheight = 0.9
         ),
-        axis.text.y = element_text(face = "italic", color = "black", size = 13),
+        axis.text.y = element_text(
+          face = "plain",
+          color = "black",
+          size = if (include_legend) 11 else 9.5,
+          lineheight = 0.9
+        ),
         legend.position = if (include_legend) "bottom" else "none",
         legend.title = element_text(size = 15),
         legend.text = element_text(size = 13),

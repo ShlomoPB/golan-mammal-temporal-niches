@@ -72,8 +72,18 @@ SPECIES_COMMON <- c(
   "Sus scrofa" = "Wild boar",
   "Gazella gazella" = "Mountain gazelle",
   "Vulpes vulpes" = "Red fox",
-  "Meles meles" = "European badger",
+  "Meles meles" = "Caucasian badger",
   "Hystrix indica" = "Indian crested porcupine"
+)
+
+SPECIES_COMMON_WRAPPED <- c(
+  "Canis lupus" = "Grey wolf",
+  "Canis aureus" = "Golden\njackal",
+  "Sus scrofa" = "Wild boar",
+  "Gazella gazella" = "Mountain\ngazelle",
+  "Vulpes vulpes" = "Red fox",
+  "Meles meles" = "Caucasian\nbadger",
+  "Hystrix indica" = "Indian crested\nporcupine"
 )
 
 DETECTION_SPECIES_ORDER <- c(
@@ -94,16 +104,6 @@ SPECIES_ABBREVIATED <- c(
   "Vulpes vulpes" = "V. vulpes",
   "Meles meles" = "M. meles",
   "Hystrix indica" = "H. indica"
-)
-
-FIGURE_A1_COMMON_NAMES <- c(
-  "Canis lupus" = "Grey wolf",
-  "Canis aureus" = "Golden jackal",
-  "Sus scrofa" = "Wild boar",
-  "Gazella gazella" = "Mountain gazelle",
-  "Vulpes vulpes" = "Red fox",
-  "Meles meles" = "Caucasian badger",
-  "Hystrix indica" = "Indian crested porcupine"
 )
 
 LAND_USE_LEVELS <- c(
