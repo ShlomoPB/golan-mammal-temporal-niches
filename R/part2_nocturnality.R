@@ -86,51 +86,90 @@ run_part2 <- function(data) {
   )
 
   culled_species <- c("Canis lupus", "Canis aureus", "Sus scrofa")
+  figure4_species_order <- c(
+    "Community",
+    "Sus scrofa",
+    "Canis aureus",
+    "Canis lupus",
+    "Meles meles",
+    "Hystrix indica",
+    "Vulpes vulpes",
+    "Gazella gazella"
+  )
+  figure4_labels <- c(
+    "Community" = "Community (pooled)",
+    SPECIES_COMMON
+  )
   forest_data <- slopes |>
     mutate(
-      species = factor(species, levels = rev(c(SPECIES, "Community"))),
-      species_label = if_else(
-        as.character(species) == "Community",
-        "<b>Community</b>",
-        paste0("<b>", unname(SPECIES_COMMON[as.character(species)]), "</b>")
-      ),
+      species = factor(species, levels = figure4_species_order),
+      species_label = unname(figure4_labels[as.character(species)]),
       species_label = factor(
         species_label,
-        levels = c(
-          "<b>Community</b>",
-          paste0("<b>", unname(SPECIES_COMMON[rev(SPECIES)]), "</b>")
-        )
+        levels = rev(unname(figure4_labels[figure4_species_order]))
       ),
       group = case_when(
         as.character(species) == "Community" ~ "Community",
         as.character(species) %in% culled_species ~ "Culled species",
         TRUE ~ "Other species"
+      ),
+      group = factor(
+        group,
+        levels = c("Community", "Culled species", "Other species")
       )
     )
   forest_colors <- c(
     "Community" = "black",
-    "Culled species" = "#B85A68",
-    "Other species" = "grey35"
+    "Culled species" = "#3B82F6",
+    "Other species" = "#9CA3AF"
   )
 
   figure4 <- ggplot(forest_data, aes(estimate, species_label, color = group)) +
-    geom_vline(xintercept = 0, linetype = "dashed", color = "grey45") +
+    geom_vline(
+      xintercept = 0,
+      linetype = "dashed",
+      color = "grey35",
+      linewidth = 0.7
+    ) +
     geom_errorbar(
       aes(xmin = ci_low, xmax = ci_high),
       orientation = "y",
       width = 0,
       linewidth = 0.8
     ) +
-    geom_point(size = 3.2) +
-    scale_color_manual(values = forest_colors, guide = "none") +
+    geom_point(size = 3.6) +
+    scale_color_manual(values = forest_colors, name = NULL) +
+    scale_x_continuous(
+      breaks = seq(-0.75, 0.25, by = 0.25),
+      labels = label_number(accuracy = 0.01),
+      limits = c(-0.765, 0.27),
+      expand = expansion(mult = 0)
+    ) +
     labs(
-      x = "Change in relative nocturnality per land-use step (h)",
+      x = "Slope (hours change in nocturnality per land-use step)",
       y = NULL
     ) +
-    theme_classic(base_size = 16) +
+    guides(
+      color = guide_legend(
+        nrow = 1,
+        byrow = TRUE,
+        override.aes = list(linewidth = 0.8, size = 3.6)
+      )
+    ) +
+    theme_bw(base_size = 16) +
     theme(
-      axis.text.y = ggtext::element_markdown(),
-      plot.margin = margin(8, 14, 8, 8)
+      axis.text = element_text(color = "grey30"),
+      axis.text.y = element_text(size = 14),
+      axis.title.x = element_text(size = 17),
+      panel.grid.major = element_line(color = "grey90", linewidth = 0.55),
+      panel.grid.minor = element_blank(),
+      panel.border = element_rect(color = "grey45", linewidth = 0.65),
+      legend.position = "bottom",
+      legend.direction = "horizontal",
+      legend.justification = "center",
+      legend.text = element_text(size = 14),
+      legend.margin = margin(t = 5, r = 0, b = 0, l = 0),
+      plot.margin = margin(8, 14, 4, 8)
     )
   save_figure(
     figure4,
