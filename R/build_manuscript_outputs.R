@@ -65,6 +65,15 @@ build_detection_outputs <- function(data) {
     )
   )
 
+  format_figure2_common_name <- function(species, common_name) {
+    case_when(
+      species == "Gazella gazella" ~ "Mountain<br>gazelle",
+      species == "Meles meles" ~ "Caucasian<br>badger",
+      species == "Hystrix indica" ~ "Indian crested<br>porcupine",
+      TRUE ~ common_name
+    )
+  }
+
   figure_data <- focal_summary |>
     pivot_longer(
       cols = c(High_culling, Low_culling, Nature_reserves, Minefields),
@@ -82,9 +91,8 @@ build_detection_outputs <- function(data) {
       land_use = factor(land_use, levels = LAND_USE_LEVELS),
       detection_count = independent_observations * proportion,
       species = factor(species, levels = rev(DETECTION_SPECIES_ORDER)),
-      common_name_plot = if_else(
-        as.character(species) == "Hystrix indica",
-        "Indian crested<br>porcupine",
+      common_name_plot = format_figure2_common_name(
+        as.character(species),
         common_name
       ),
       label = paste0("<b>", common_name_plot, "</b>")
@@ -92,9 +100,8 @@ build_detection_outputs <- function(data) {
   label_levels <- focal_summary |>
     mutate(
       species = factor(species, levels = rev(DETECTION_SPECIES_ORDER)),
-      common_name_plot = if_else(
-        as.character(species) == "Hystrix indica",
-        "Indian crested<br>porcupine",
+      common_name_plot = format_figure2_common_name(
+        as.character(species),
         common_name
       ),
       label = paste0("<b>", common_name_plot, "</b>")
@@ -105,9 +112,8 @@ build_detection_outputs <- function(data) {
 
   label_data <- focal_summary |>
     mutate(
-      common_name_plot = if_else(
-        species == "Hystrix indica",
-        "Indian crested<br>porcupine",
+      common_name_plot = format_figure2_common_name(
+        species,
         common_name
       ),
       label = paste0("<b>", common_name_plot, "</b>"),

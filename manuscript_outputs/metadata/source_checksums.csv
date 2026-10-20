@@ -12,7 +12,7 @@ CITATION.cff,d8862362b06b6f88d41a6018c82231dd
 R/00_config.R,bd51337fc552717045c43dbc4c9ab19b
 R/01_helpers.R,c075fa9f0c3da29f2dc978fe54ded38b
 R/02_data.R,795b02b28d7448708209db1a953608fe
-R/build_manuscript_outputs.R,24b969e7fcd51f7a4fdaff8491ffbe62
+R/build_manuscript_outputs.R,e0dc7bf91cb6b45e11e47c5e0268e688
 R/part1_land_use_activity.R,4c1098d6b8d041883aa3750bdc565466
 R/part2_nocturnality.R,de41702a31d49387733fd404be5b24a7
 R/part4_human_activity.R,83a5fcf10054196ed768e65bfe4315c2
