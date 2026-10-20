@@ -98,7 +98,13 @@ run_part2 <- function(data) {
   )
   figure4_labels <- c(
     "Community" = "Community (pooled)",
-    SPECIES_COMMON
+    "Canis lupus" = "Grey wolf",
+    "Canis aureus" = "Golden jackal",
+    "Sus scrofa" = "Wild boar",
+    "Gazella gazella" = "Mountain\ngazelle",
+    "Vulpes vulpes" = "Red fox",
+    "Meles meles" = "Caucasian\nbadger",
+    "Hystrix indica" = "Indian crested\nporcupine"
   )
   forest_data <- slopes |>
     mutate(
@@ -159,7 +165,7 @@ run_part2 <- function(data) {
     theme_bw(base_size = 16) +
     theme(
       axis.text = element_text(color = "grey30"),
-      axis.text.y = element_text(size = 14),
+      axis.text.y = element_text(size = 11.5, lineheight = 0.9),
       axis.title.x = element_text(size = 17),
       panel.grid.major = element_line(color = "grey90", linewidth = 0.55),
       panel.grid.minor = element_blank(),
