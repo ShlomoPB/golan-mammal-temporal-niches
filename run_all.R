@@ -13,8 +13,11 @@ required_packages <- c(
   "readr",
   "Rcpp",
   "scales",
+  "sf",
   "tibble",
-  "tidyr"
+  "terra",
+  "tidyr",
+  "unmarked"
 )
 missing_packages <- required_packages[
   !vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)
@@ -34,6 +37,7 @@ source(file.path("R", "part2_nocturnality.R"))
 source(file.path("R", "part4_human_activity.R"))
 source(file.path("R", "part5_species_overlap.R"))
 source(file.path("R", "part6_gazelle_focus.R"))
+source(file.path("R", "habitat_appendix.R"))
 source(file.path("R", "build_manuscript_outputs.R"))
 source(file.path("R", "validate_outputs.R"))
 
@@ -48,6 +52,7 @@ part2_results <- run_part2(analysis_data)
 part4_results <- run_part4(analysis_data)
 part5_results <- run_part5(analysis_data)
 part6_results <- run_part6(analysis_data, part4_results)
+habitat_results <- run_habitat_appendix()
 detection_results <- build_detection_outputs(analysis_data)
 table_b1_results <- build_table_b1(analysis_data)
 
@@ -58,6 +63,7 @@ results <- list(
   part4 = part4_results,
   part5 = part5_results,
   part6 = part6_results,
+  habitat = habitat_results,
   detections = detection_results,
   table_b1 = table_b1_results
 )

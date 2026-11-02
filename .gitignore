@@ -29,6 +29,11 @@ renv/staging/
 /Independent_Captures_Sep_2025_solar.csv
 /SiteCovs_280825.csv
 
-# Codex-local configuration
-/.agents/
-/.codex/
+# Local revision audits and full-resolution spatial working files
+/habitat_check_outputs/
+/pvalue_formatted_manuscripts/
+/pvalue_formatting_backups/
+/pvalue_formatting_audit.csv
+/pvalue_formatting_report.md
+/scripts/
+/spatial data/

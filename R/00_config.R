@@ -7,6 +7,31 @@ DATA_CAPTURES <- file.path(
   "Independent_Captures_Sep_2025_solar.csv"
 )
 DATA_SITECOVS <- file.path(PROJECT_DIR, "data", "SiteCovs_280825.csv")
+HUMAN_ACTIVITY_DATA_DIR <- file.path(PROJECT_DIR, "data", "human_activity")
+DATA_HUMAN_COUNTS <- file.path(
+  HUMAN_ACTIVITY_DATA_DIR,
+  "Human_Abundance_Normalized.csv"
+)
+DATA_HUMAN_OBSCOVS <- file.path(
+  HUMAN_ACTIVITY_DATA_DIR,
+  "ObsCovs_050524.csv"
+)
+DATA_HUMAN_SITECOVS <- file.path(
+  HUMAN_ACTIVITY_DATA_DIR,
+  "SiteCovs_060324.csv"
+)
+HABITAT_DATA_DIR <- file.path(PROJECT_DIR, "data", "habitat")
+HABITAT_RASTER <- file.path(
+  HABITAT_DATA_DIR,
+  "maarag_landcover_25m_study_extent.tif"
+)
+HABITAT_CAMERAS <- file.path(HABITAT_DATA_DIR, "camera_locations.gpkg")
+HABITAT_POLYGONS <- file.path(HABITAT_DATA_DIR, "sampling_polygons.gpkg")
+HABITAT_KEY <- file.path(HABITAT_DATA_DIR, "landcover_key.csv")
+HABITAT_FIELD_VEGETATION <- file.path(
+  HABITAT_DATA_DIR,
+  "field_vegetation_structure.csv"
+)
 
 # Camelot Date/Time values are camera-local Asia/Jerusalem times. They must be
 # assigned that timezone without conversion from UTC. This checksum guards
@@ -198,8 +223,8 @@ PART4_SPECIES_PRESSURES <- tibble::tribble(
   "Meles meles", "boar activity"
 )
 
-# This preserves the final requested badger panel in Figure 3. The validation
-# report explicitly notes that it is not the minimum-overlap badger contrast.
+# Figure 3 presents the high- versus low-culling badger comparison specified
+# for the manuscript rather than selecting that panel by minimum overlap.
 FIGURE3_FORCED_PAIR <- c(
   species = "Meles meles",
   group1 = "High culling",

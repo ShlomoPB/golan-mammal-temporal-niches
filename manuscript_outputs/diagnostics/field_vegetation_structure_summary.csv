@@ -1,0 +1,17 @@
+management_category,vegetation_structure,n_cameras,percent_within_management
+High-culling pasture,Grassland,10,66.66666666666667
+High-culling pasture,Shrubs < 2 m,1,6.666666666666667
+High-culling pasture,Shrubs > 2 m,3,20
+High-culling pasture,Tree Cover Overhead,1,6.666666666666667
+Low-culling pasture,Grassland,11,73.33333333333333
+Low-culling pasture,Shrubs < 2 m,0,0
+Low-culling pasture,Shrubs > 2 m,4,26.666666666666668
+Low-culling pasture,Tree Cover Overhead,0,0
+Minefield,Grassland,13,86.66666666666667
+Minefield,Shrubs < 2 m,0,0
+Minefield,Shrubs > 2 m,0,0
+Minefield,Tree Cover Overhead,2,13.333333333333334
+Nature reserve,Grassland,5,33.333333333333336
+Nature reserve,Shrubs < 2 m,2,13.333333333333334
+Nature reserve,Shrubs > 2 m,3,20
+Nature reserve,Tree Cover Overhead,5,33.333333333333336

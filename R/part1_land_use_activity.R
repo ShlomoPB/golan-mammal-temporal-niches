@@ -99,7 +99,7 @@ run_part1 <- function(data) {
     mutate(
       selection_rule = if_else(
         as.character(species) == FIGURE3_FORCED_PAIR[["species"]],
-        "Author-requested high-culling vs low-culling contrast",
+        "Manuscript-specified high-culling vs low-culling contrast",
         "Minimum estimated overlap"
       )
     )

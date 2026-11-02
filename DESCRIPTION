@@ -1,7 +1,7 @@
 Package: golanDielActivity
 Type: Project
 Title: Mammalian Temporal Niches and Activity Shift under Culling and Land Management
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: c(
     person("Shlomo", "Preiss-Bloom", role = c("aut", "cre"),
            email = "preissbloom@tau.ac.il"),
@@ -31,5 +31,8 @@ Imports:
     readr,
     Rcpp,
     scales,
+    sf,
     tibble,
-    tidyr
+    terra,
+    tidyr,
+    unmarked

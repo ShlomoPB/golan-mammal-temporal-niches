@@ -1,0 +1,18 @@
+code,source_category_english,source_subcategory_english,valid_landcover,natural_open,natural_woody,structural_woody,classification_note
+-128,<Null>,<Null>,FALSE,FALSE,FALSE,FALSE,Raster background excluded from valid area
+11,Built-Up,Built up and road surface,TRUE,FALSE,FALSE,FALSE,Built cover
+12,Built-Up,Agricultural buildings,TRUE,FALSE,FALSE,FALSE,Built agricultural structures
+21,Disturbed,Transportation islands,TRUE,FALSE,FALSE,FALSE,Disturbed cover
+22,Disturbed,Quarries and tailings,TRUE,FALSE,FALSE,FALSE,Disturbed cover
+23,Disturbed,Earth works,TRUE,FALSE,FALSE,FALSE,Disturbed cover
+24,Disturbed,Other disturbed,TRUE,FALSE,FALSE,FALSE,Disturbed cover
+25,Disturbed,Solar farms,TRUE,FALSE,FALSE,FALSE,Disturbed cover
+31,Natural and Wooded,Low vegetation cover,TRUE,TRUE,FALSE,FALSE,Structurally open; vegetation subtype is not explicit
+32,Natural and Wooded,Herbaceous,TRUE,TRUE,FALSE,FALSE,Herbaceous natural cover
+33,Natural and Wooded,Shrubs,TRUE,FALSE,TRUE,TRUE,Natural woody cover
+34,Natural and Wooded,Mediterranean maquis,TRUE,FALSE,TRUE,TRUE,Natural woody cover
+35,Natural and Wooded,Planted conifer forest,TRUE,FALSE,FALSE,TRUE,Structurally woody but anthropogenic
+41,Agriculture,Cropland,TRUE,FALSE,FALSE,FALSE,Agricultural cover
+42,Agriculture,Plantations and orchards,TRUE,FALSE,FALSE,FALSE,Woody agriculture excluded from structural woody cover
+51,Water,Natural water surface,TRUE,FALSE,FALSE,FALSE,Water
+52,Water,Artificial water surface,TRUE,FALSE,FALSE,FALSE,Water

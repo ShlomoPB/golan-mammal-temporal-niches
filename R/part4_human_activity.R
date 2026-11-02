@@ -169,15 +169,12 @@ run_part4 <- function(data) {
   annotation_data <- human_summary |>
     transmute(
       species = factor(species, levels = SPECIES),
-      annotation = paste0(
-        "\u0394",
-        if_else(estimator == "Dhat1", "\u2081", "\u2084"),
-        " = ",
+      annotation = sprintf(
+        "atop(Delta[%s] == '%s'*'%s', 'Noct. = %+.2f h%s')",
+        if_else(estimator == "Dhat1", "1", "4"),
         sprintf("%.2f", temporal_overlap_delta),
         significance_stars(kernel_test_p),
-        "\nNoct. = ",
-        sprintf("%+.2f", delta_noct_Q4_minus_Q1),
-        " h",
+        delta_noct_Q4_minus_Q1,
         significance_stars(nocturnality_test_p)
       )
     ) |>
@@ -212,7 +209,8 @@ run_part4 <- function(data) {
       linewidth = 0.3,
       label.padding = grid::unit(0.19, "lines"),
       lineheight = 1,
-      size = 4
+      size = 4,
+      parse = TRUE
     ) +
     facet_wrap(~panel, ncol = 3, scales = "free_y") +
     scale_color_manual(values = HUMAN_ACTIVITY_COLORS, name = NULL) +

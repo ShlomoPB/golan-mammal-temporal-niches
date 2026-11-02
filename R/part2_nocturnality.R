@@ -418,13 +418,12 @@ run_part2 <- function(data) {
     "nocturnality. Error bars indicate 95% bootstrap confidence intervals.",
     "Minefields are the reference category and are therefore fixed at zero."
   )
-  writeLines(
+  write_lines_lf(
     figure_a1_caption,
     file.path(
       OUTPUT_DIRS$supplementary_figures,
       "Figure_A1_caption.txt"
-    ),
-    useBytes = TRUE
+    )
   )
   save_figure(
     figure_a1,

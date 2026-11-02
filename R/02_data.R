@@ -32,8 +32,8 @@ load_analysis_data <- function() {
     stop("Expected exactly 15 cameras in each land-use category.")
   }
 
-  captures <- read.csv(DATA_CAPTURES, check.names = FALSE) |>
-    clean_names() |>
+  captures_raw <- read.csv(DATA_CAPTURES, check.names = FALSE)
+  captures <- suppressWarnings(clean_names(captures_raw)) |>
     as_tibble() |>
     mutate(
       camera_name = as.character(camera_name),

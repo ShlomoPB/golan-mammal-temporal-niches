@@ -43,6 +43,13 @@ validate_analysis <- function(results) {
     "Table A.2 has seven species plus humans",
     nrow(results$detections$table_a2) == 8,
     paste("observed", nrow(results$detections$table_a2)),
+    "Table A.2 reports the submitted descriptive wild-boar total",
+    with(
+      results$detections$table_a2 |>
+        filter(species == "Sus scrofa"),
+      independent_observations == 4334
+    ),
+    "source export n = 4,334; inferential focal data n = 4,333",
     "Table A.3 has 28 species-by-land-use rows",
     nrow(results$part2$species_land_use) == 28,
     paste("observed", nrow(results$part2$species_land_use)),
@@ -172,6 +179,35 @@ validate_analysis <- function(results) {
     "Table B.1 has 15 cameras in every quartile",
     all(results$table_b1$counts$Total == 15),
     paste(results$table_b1$counts$Total, collapse = ", "),
+    "Appendix C habitat design has 60 cameras and 12 polygons",
+    results$habitat$n_cameras == 60L && results$habitat$n_polygons == 12L,
+    paste(
+      results$habitat$n_cameras,
+      "cameras and",
+      results$habitat$n_polygons,
+      "polygons"
+    ),
+    "Appendix C structural-woody test matches the submitted result",
+    with(
+      results$habitat$tests |>
+        filter(buffer_radius_m == 500L, variable == "structural_woody"),
+      abs(f_statistic - 6.999404287425887) < 1e-10 &&
+        abs(eta_squared - 0.7241209298657573) < 1e-10 &&
+        abs(p_exact - 0.026623376623376622) < 1e-12
+    ),
+    "expected F = 6.999, eta-squared = 0.724, P = 0.027",
+    "Appendix C natural-open test matches the submitted result",
+    with(
+      results$habitat$tests |>
+        filter(buffer_radius_m == 500L, variable == "natural_open"),
+      abs(f_statistic - 4.860524921507623) < 1e-10 &&
+        abs(eta_squared - 0.6457288703988651) < 1e-10 &&
+        abs(p_exact - 0.04896103896103896) < 1e-12
+    ),
+    "expected F = 4.861, eta-squared = 0.646, P = 0.049",
+    "Appendix C field-vegetation test matches the submitted result",
+    abs(results$habitat$field_test$p_exact - 0.5761038961038961) < 1e-12,
+    "expected exact P = 0.576",
     "All Part 5 beta models report optimizer convergence",
     all(results$part5$model_diagnostics$optimizer_convergence_code == 0),
     paste(
@@ -203,6 +239,10 @@ validate_analysis <- function(results) {
     file.path(
       OUTPUT_DIRS$supplementary_figures,
       "Figure_A2_activity_by_human_activity.png"
+    ),
+    file.path(
+      OUTPUT_DIRS$supplementary_tables,
+      "Table_C1_habitat_composition_500m.csv"
     )
   )
   checks <- bind_rows(
@@ -236,94 +276,5 @@ validate_analysis <- function(results) {
     stop("Validation failed; see diagnostics/validation_checks.csv.")
   }
 
-  gazelle <- results$part6$gazelle_summary
-  badger_selected <- results$part1$selected |>
-    filter(as.character(species) == "Meles meles")
-  notes <- c(
-    paste0(
-      "RUN PROFILE: ", RUN_PROFILE, ". Publication outputs are valid only when ",
-      "RUN_PROFILE is publication."
-    ),
-    paste0(
-      "The submitted gazelle nocturnality change is reproduced from the ",
-      "camera-local timestamps: ",
-      sprintf("%+.2f", gazelle$delta_noct_Q4_minus_Q1),
-      " h (95% CI ",
-      sprintf("%.2f", gazelle$delta_CI_low),
-      " to ",
-      sprintf("%.2f", gazelle$delta_CI_high),
-      ")."
-    ),
-    paste0(
-      "Capture times use ", CAPTURE_TIME_BASIS,
-      ". Do not add the Israel UTC+2/UTC+3 offset; Camelot timestamps are ",
-      "already local camera times."
-    ),
-    paste0(
-      "Figure 3 retains the author-requested badger contrast: ",
-      badger_selected$group1,
-      " vs ",
-      badger_selected$group2,
-      ". The caption should not state that every panel is the minimum-overlap pair."
-    ),
-    paste0(
-      "Table A.5 and its caption should use Delta, not Dhat4, because ",
-      "low-event badger comparisons use Dhat1."
-    ),
-    paste0(
-      "Figure A.2 overlap and test values are reported in Table A.1, not Table A.2."
-    ),
-    paste0(
-      "Figure A.1 and Table A.3 descriptive CIs use independent detection ",
-      "events as the uniform replacement-sampling unit. Sighting quantity is ",
-      "used once, as the weighted-mean analysis weight; it is not used as a ",
-      "resampling probability."
-    ),
-    paste0(
-      "Standard overlapEst coefficients use independent detection events. ",
-      "The package does not support weights. Dhat4 randomization tests retain ",
-      "the original weighted compareCkern implementation; low-event Dhat1 ",
-      "tests use event-level permutation."
-    ),
-    paste0(
-      "The current CSV gives badger naive occupancy as ",
-      sprintf(
-        "%.2f",
-        results$detections$table_a2$proportion_sites[
-          results$detections$table_a2$species == "Meles meles"
-        ]
-      ),
-      " (unique occupied cameras / 60), not the submitted value 0.85."
-    ),
-    paste0(
-      "Using all human aliases defined in the analysis, the current CSV gives ",
-      "human naive occupancy as ",
-      sprintf(
-        "%.2f",
-        results$detections$table_a2$proportion_sites[
-          results$detections$table_a2$species == "Homo sapiens"
-        ]
-      ),
-      " (unique occupied cameras / 60), not the submitted value 0.88."
-    ),
-    paste0(
-      "Table 1 keeps the original test-specific uncertainty output and labels ",
-      "its source explicitly: Dhat4 rows report the standard deviation of the ",
-      "compareCkern randomization-null distribution, whereas low-event Dhat1 ",
-      "rows report a within-group bootstrap SE. These should not be described ",
-      "collectively as bootstrap SEs in the caption."
-    ),
-    paste0(
-      "The revised activity-curve figures show deterministic point-density ",
-      "curves and shaded overlap, but no bootstrap uncertainty envelopes. ",
-      "Remove the Methods statement that the displayed curves include ",
-      "bootstrap envelopes unless ribbons are restored."
-    )
-  )
-  writeLines(
-    notes,
-    file.path(OUTPUT_DIRS$metadata, "manuscript_update_notes.txt"),
-    useBytes = TRUE
-  )
   invisible(checks)
 }

@@ -4,8 +4,8 @@ build_detection_outputs <- function(data) {
   focal <- data$focal
   site_covs <- data$site_covs
 
-  focal_summary <- map_dfr(SPECIES, function(sp) {
-    species_data <- focal |> filter(species == sp)
+  summarise_focal_detections <- function(detection_data) map_dfr(SPECIES, function(sp) {
+    species_data <- detection_data |> filter(species == sp)
     total <- sum(species_data$sighting_quantity)
     by_land_use <- species_data |>
       group_by(land_use) |>
@@ -25,6 +25,32 @@ build_detection_outputs <- function(data) {
       Minefields = by_land_use$n[by_land_use$land_use == "Minefields"] / total
     )
   })
+
+  focal_summary <- summarise_focal_detections(focal)
+
+  # Figure 2 retains the descriptive source-export count. One wild-boar event
+  # appears in two adjacent deployment sessions at the same camera and time;
+  # inferential data remain deduplicated, but the descriptive figure total is
+  # therefore 4,334 rather than 4,333.
+  figure_focal <- captures |>
+    filter(
+      species %in% SPECIES,
+      is.finite(time_rad),
+      is.finite(sighting_quantity),
+      sighting_quantity > 0,
+      !is.na(land_use)
+    ) |>
+    mutate(
+      species = factor(species, levels = SPECIES),
+      land_use = factor(land_use, levels = LAND_USE_LEVELS)
+    )
+  figure_focal_summary <- summarise_focal_detections(figure_focal)
+  figure_boar_total <- figure_focal_summary |>
+    filter(species == "Sus scrofa") |>
+    pull(independent_observations)
+  if (!identical(as.numeric(figure_boar_total), 4334)) {
+    stop("Figure 2 validation failed: expected wild-boar n = 4,334.")
+  }
 
   humans <- captures |>
     filter(
@@ -56,7 +82,10 @@ build_detection_outputs <- function(data) {
       human_by_land_use$n[human_by_land_use$land_use == "Minefields"] / human_total
   )
 
-  table_a2 <- bind_rows(focal_summary, human_summary)
+  # The submitted descriptive table and Figure 2 report the source-export
+  # total. Inferential analyses use `focal`, where the duplicated cross-session
+  # row is collapsed to one independent event.
+  table_a2 <- bind_rows(figure_focal_summary, human_summary)
   write_csv(
     table_a2,
     file.path(
@@ -74,7 +103,7 @@ build_detection_outputs <- function(data) {
     )
   }
 
-  figure_data <- focal_summary |>
+  figure_data <- figure_focal_summary |>
     pivot_longer(
       cols = c(High_culling, Low_culling, Nature_reserves, Minefields),
       names_to = "land_use",
@@ -97,7 +126,7 @@ build_detection_outputs <- function(data) {
       ),
       label = paste0("<b>", common_name_plot, "</b>")
     )
-  label_levels <- focal_summary |>
+  label_levels <- figure_focal_summary |>
     mutate(
       species = factor(species, levels = rev(DETECTION_SPECIES_ORDER)),
       common_name_plot = format_figure2_common_name(
@@ -110,7 +139,7 @@ build_detection_outputs <- function(data) {
     pull(label)
   figure_data$label <- factor(figure_data$label, levels = label_levels)
 
-  label_data <- focal_summary |>
+  label_data <- figure_focal_summary |>
     mutate(
       common_name_plot = format_figure2_common_name(
         species,
@@ -335,7 +364,10 @@ write_reproducibility_metadata <- function(results) {
     "glmmTMB",
     "emmeans",
     "car",
-    "scales"
+    "scales",
+    "sf",
+    "terra",
+    "unmarked"
   )
   package_versions <- tibble(
     package = package_names,
@@ -397,20 +429,29 @@ write_reproducibility_metadata <- function(results) {
       )
     )
   }
-  writeLines(
+  write_lines_lf(
     environment_notes,
-    file.path(OUTPUT_DIRS$metadata, "environment_notes.txt"),
-    useBytes = TRUE
+    file.path(OUTPUT_DIRS$metadata, "environment_notes.txt")
   )
 
   checksum_files <- c(
     DATA_CAPTURES,
     DATA_SITECOVS,
     file.path(PROJECT_DIR, "run_all.R"),
+    file.path(PROJECT_DIR, "run_human_activity_index.R"),
     file.path(PROJECT_DIR, "README.md"),
-    file.path(PROJECT_DIR, "supplementary_methods_missing_details.md"),
     file.path(PROJECT_DIR, "renv.lock"),
     file.path(PROJECT_DIR, "data", "README.md"),
+    list.files(
+      HUMAN_ACTIVITY_DATA_DIR,
+      recursive = TRUE,
+      full.names = TRUE
+    ),
+    list.files(
+      HABITAT_DATA_DIR,
+      recursive = TRUE,
+      full.names = TRUE
+    ),
     file.path(PROJECT_DIR, "DESCRIPTION"),
     file.path(PROJECT_DIR, "LICENSE"),
     file.path(PROJECT_DIR, "CITATION.cff"),
@@ -442,9 +483,11 @@ write_reproducibility_metadata <- function(results) {
     file.path(OUTPUT_DIRS$metadata, "source_checksums.csv")
   )
 
-  capture.output(
-    sessionInfo(),
-    file = file.path(OUTPUT_DIRS$metadata, "sessionInfo.txt")
+  session_lines <- capture.output(sessionInfo())
+  session_lines <- sub("[[:blank:]]+$", "", session_lines)
+  write_lines_lf(
+    session_lines,
+    file.path(OUTPUT_DIRS$metadata, "sessionInfo.txt")
   )
 
   generated <- list.files(

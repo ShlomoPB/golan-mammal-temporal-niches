@@ -6,6 +6,7 @@
 *.cpp text eol=lf
 *.h text eol=lf
 *.md text eol=lf
+*.txt text eol=lf
 *.cff text eol=lf
 *.json text eol=lf
 *.lock text eol=lf
@@ -16,6 +17,8 @@ LICENSE text eol=lf
 # their original line endings, so the two data files remain byte-preserved.
 *.csv text eol=lf
 data/*.csv binary
+data/human_activity/*.csv binary
+manuscript_outputs/additional_results/human_detection_candidate_models_archived.csv binary
 
 *.png binary
 *.jpeg binary

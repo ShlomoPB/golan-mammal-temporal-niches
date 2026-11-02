@@ -1,0 +1,6 @@
+source_file,source_md5,derived_public_input
+spatial data/60 INSTALLED CAMERAS.shp,ca5ca06546d1de08358effea36a46bcf,camera_locations.gpkg
+spatial data/Land Use Polygons.shp,aeb2c5e04e3f2b91b3eb27ce2af4a81d,sampling_polygons.gpkg
+spatial data/ObsCovs_050524.csv,c0c4e9ce9afdfdc10a51530d4292ebb2,field_vegetation_structure.csv
+spatial data/Hamaarag Landcover/DMT18_Final_Full.tif,28023958731d6f8c82d316a7f272e97b,maarag_landcover_25m_study_extent.tif
+spatial data/Hamaarag Landcover/Categories.xlsx,2b248efe7d79b4f5ff3864a40b6340cb,landcover_key.csv

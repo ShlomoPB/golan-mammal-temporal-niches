@@ -22,6 +22,10 @@ run_part6 <- function(data, part4) {
       "Q4 high human activity (n=", format(n_high, big.mark = ","), ")"
     )
   )
+  panel_a_annotation <- paste0(
+    "\u0394 = ", sprintf("%.2f", gazelle_human$temporal_overlap_delta),
+    "\n", format_p_statement(gazelle_human$kernel_test_p)
+  )
 
   panel_a <- ggplot(gazelle_curves, aes(hour, density, color = group)) +
     daypart_layers() +
@@ -33,6 +37,17 @@ run_part6 <- function(data, part4) {
       alpha = 0.23
     ) +
     geom_line(linewidth = 1.2) +
+    annotate(
+      "label",
+      x = 10,
+      y = 0.012,
+      label = panel_a_annotation,
+      size = 5.4,
+      lineheight = 1.05,
+      fill = alpha("white", 0.94),
+      color = "black",
+      linewidth = 0.35
+    ) +
     scale_color_manual(
       values = HUMAN_ACTIVITY_COLORS,
       labels = panel_a_labels,
@@ -60,6 +75,7 @@ run_part6 <- function(data, part4) {
       plot.title = element_text(face = "bold", size = 19),
       panel.grid.minor = element_blank(),
       axis.title = element_text(size = 19),
+      axis.title.y = element_text(size = 14.5),
       axis.text = element_text(size = 17),
       legend.position = "inside",
       legend.position.inside = c(0.985, 0.985),
@@ -86,6 +102,31 @@ run_part6 <- function(data, part4) {
     filter(species == "Gazella gazella")
   reserve_counts <- gazelle_reserve |>
     count(reserve, name = "n_events")
+
+  set.seed(SEED + 600L)
+  yehudiya <- gazelle_reserve |> filter(reserve == "Temporally zoned reserve")
+  odem <- gazelle_reserve |> filter(reserve == "Open-access reserve")
+  reserve_test <- adaptive_overlap_test(
+    yehudiya$time_rad,
+    odem$time_rad,
+    yehudiya$sighting_quantity,
+    odem$sighting_quantity,
+    dhat4_reps = N_RANDOMIZATIONS_PART6,
+    dhat1_reps = N_RANDOMIZATIONS_DHAT1,
+    bootstrap_reps = N_BOOT_DHAT1
+  ) |>
+    mutate(
+      comparison = "Temporally zoned reserve vs open-access reserve",
+      n_temporally_zoned = nrow(yehudiya),
+      n_open_access = nrow(odem),
+      n_individuals_temporally_zoned = sum(yehudiya$sighting_quantity),
+      n_individuals_open_access = sum(odem$sighting_quantity),
+      .before = 1
+    )
+  panel_b_annotation <- paste0(
+    "\u0394 = ", sprintf("%.2f", reserve_test$delta),
+    "\n", format_p_statement(reserve_test$p_value)
+  )
 
   reserve_curves <- map_dfr(names(RESERVE_COLORS), function(group) {
     curve <- activity_curve(
@@ -133,6 +174,17 @@ run_part6 <- function(data, part4) {
       linewidth = 1.05,
       show.legend = TRUE
     ) +
+    annotate(
+      "label",
+      x = 10,
+      y = 0.014,
+      label = panel_b_annotation,
+      size = 5.4,
+      lineheight = 1.05,
+      fill = alpha("white", 0.94),
+      color = "black",
+      linewidth = 0.35
+    ) +
     scale_color_manual(
       values = RESERVE_COLORS,
       labels = reserve_labels,
@@ -160,6 +212,7 @@ run_part6 <- function(data, part4) {
       plot.title = element_text(face = "bold", size = 19),
       panel.grid.minor = element_blank(),
       axis.title = element_text(size = 19),
+      axis.title.y = element_text(size = 14.5),
       axis.text = element_text(size = 17),
       legend.position = c(0.015, 0.985),
       legend.justification = c(0, 1),
@@ -196,26 +249,6 @@ run_part6 <- function(data, part4) {
     height = 10.2
   )
 
-  set.seed(SEED + 600L)
-  yehudiya <- gazelle_reserve |> filter(reserve == "Temporally zoned reserve")
-  odem <- gazelle_reserve |> filter(reserve == "Open-access reserve")
-  reserve_test <- adaptive_overlap_test(
-    yehudiya$time_rad,
-    odem$time_rad,
-    yehudiya$sighting_quantity,
-    odem$sighting_quantity,
-    dhat4_reps = N_RANDOMIZATIONS_PART6,
-    dhat1_reps = N_RANDOMIZATIONS_DHAT1,
-    bootstrap_reps = N_BOOT_DHAT1
-  ) |>
-    mutate(
-      comparison = "Temporally zoned reserve vs open-access reserve",
-      n_temporally_zoned = nrow(yehudiya),
-      n_open_access = nrow(odem),
-      n_individuals_temporally_zoned = sum(yehudiya$sighting_quantity),
-      n_individuals_open_access = sum(odem$sighting_quantity),
-      .before = 1
-    )
   write_csv(
     reserve_test,
     file.path(

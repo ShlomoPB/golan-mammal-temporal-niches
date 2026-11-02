@@ -602,3 +602,23 @@ format_p <- function(p) {
     TRUE ~ sprintf("%.3f", p)
   )
 }
+
+format_p_statement <- function(p) {
+  case_when(
+    !is.finite(p) ~ NA_character_,
+    p < 0.001 ~ "P < 0.001",
+    TRUE ~ sprintf("P = %.3f", p)
+  )
+}
+
+write_lines_lf <- function(text, path) {
+  connection <- file(path, open = "wb")
+  on.exit(close(connection), add = TRUE)
+  content <- if (length(text)) {
+    paste0(paste(enc2utf8(text), collapse = "\n"), "\n")
+  } else {
+    ""
+  }
+  writeBin(charToRaw(content), connection)
+  invisible(path)
+}
